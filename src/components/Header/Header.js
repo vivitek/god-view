@@ -6,7 +6,7 @@ function Header() {
           <a href="/">Home page</a>
           <a href="/logs">API & Traefik logs</a>
           <a href="/statistics">Statistics</a>
-          <a href="/database">Databse edition/view</a>
+          <a href="/database">Database edition/view</a>
         </header>
     )
 }
