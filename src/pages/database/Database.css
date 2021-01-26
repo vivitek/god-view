@@ -1,0 +1,12 @@
+.main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #26282c;
+    border-radius: 20px;
+    flex: 0 48%;
+    margin: 20px 10px;
+    height: 50%;
+}
