@@ -6,16 +6,16 @@ function Home() {
   return (
     <div className="page main">
       <div className="card">
-        <button className="button">Text</button>
+        <div className="button"></div>
       </div>
       <div className="card">
-        <button className="button">Text</button>
+        <div className="button"></div>
       </div>
       <div className="card">
-        <button className="button">Text</button>
+        <div className="button"></div>
       </div>
       <div className="card">
-        <button className="button">Text</button>
+        <div className="button"></div>
       </div>
     </div>
   );
