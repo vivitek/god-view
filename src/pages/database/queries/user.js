@@ -19,8 +19,10 @@ const DELETE_USER = gql`
 `
 
 const CREATE_USER = gql`
-    mutation($userCreationData: userCreationInput!) {
+    mutation($userCreationData: UserCreationInput!) {
         createUser(userCreationData : $userCreationData) {
+            username
+            email
             _id
         }
     }

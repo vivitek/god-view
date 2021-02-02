@@ -3,8 +3,8 @@ import { useMutation, useQuery } from '@apollo/client'
 import { Fab, makeStyles } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import DatabaseViewer from '../../components/DatabaseViewer/DatabseViewer'
-import { GET_ROUTERS, DELETE_ROUTER } from "./queries/router"
-import { GET_USERS, DELETE_USER } from "./queries/user"
+import { GET_ROUTERS, DELETE_ROUTER, CREATE_ROUTER } from "./queries/router"
+import { GET_USERS, DELETE_USER, CREATE_USER } from "./queries/user"
 import './Database.css'
 import '../Page.css'
 import RessourceCreationForm from '../../components/RessourceCreationForm/RessourceCreationForm';
@@ -30,18 +30,34 @@ const Database = () => {
 
   const {loading: routerLoading, error: routerErr, data: routerData} = useQuery(GET_ROUTERS)
   const [deleteRouter] = useMutation(DELETE_ROUTER)
+  const [createRouter] = useMutation(CREATE_ROUTER)
 
   const {loading: userLoading, error: userErr, data: userData} = useQuery(GET_USERS)
   const [deleteUser] = useMutation(DELETE_USER)
+  const [createUser] = useMutation(CREATE_USER)
 
   const deleteRouterCb = (routerId) => {
     deleteRouter({variables: { id: routerId }})
     setRouters(routers.filter(router => router._id !== routerId))
   }
+ const createRouterCb = (values) => {
+    createRouter({variables: {createRouterData: values}})
+      .then(d => {
+        setRouters(routers.concat({...values, _id: d.data.createRouter._id}))
+        setModalOpen(false)
+      })
+  }
 
   const deleteUserCb = (userId) => {
     deleteUser({variables: { id: userId }})
     setUsers(users.filter(user => user._id !== userId))
+  }
+  const createUserCb = (values) => {
+    createUser({variables: {userCreationData: values}})
+      .then(d => {
+        setUsers(users.concat({...values, _id: d.data.createUser._id}))
+        setModalOpen(false)
+      })
   }
 
   useEffect(() => {
@@ -81,9 +97,6 @@ const Database = () => {
           deleteCb={deleteUserCb}
         />}
       </div>
-      <div className="card">Cette div est là pour tester mon css</div>
-      <div className="card">Cette div est là pour tester mon css</div>
-      <div className="card">Cette div est là pour tester mon css</div>
       {/* Ressource creation button */}
       <Fab color="secondary"
         aria-label="add"
@@ -96,6 +109,8 @@ const Database = () => {
       <RessourceCreationForm
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
+        createUserCb={createUserCb}
+        createRouterCb={createRouterCb}
       />
     </div>
   )

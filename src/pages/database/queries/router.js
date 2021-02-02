@@ -19,7 +19,18 @@ const DELETE_ROUTER = gql`
     }
 `
 
+const CREATE_ROUTER = gql`
+    mutation($createRouterData: RouterCreationInput!) {
+        createRouter(createRouterData: $createRouterData) {
+            name
+            url
+            _id
+        }
+    }
+`
+
 export {
     GET_ROUTERS,
-    DELETE_ROUTER
+    DELETE_ROUTER,
+    CREATE_ROUTER
 }

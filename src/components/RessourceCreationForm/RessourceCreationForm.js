@@ -44,7 +44,7 @@ const useStyles = makeStyles({
   }
 })
 
-const RessourceCreationForm = ({modalOpen, setModalOpen}) => {
+const RessourceCreationForm = ({modalOpen, setModalOpen, createUserCb, createRouterCb}) => {
   const classes = useStyles()
 
   const [newElement, setNewElement] = useState("router")
@@ -83,6 +83,7 @@ const RessourceCreationForm = ({modalOpen, setModalOpen}) => {
                 formClass={classes.form}
                 fieldClass={classes.formField}
                 btnClass={classes.formBtn}
+                createCb={createRouterCb}
               />
             }
             {newElement === "user" &&
@@ -90,6 +91,7 @@ const RessourceCreationForm = ({modalOpen, setModalOpen}) => {
                 formClass={classes.form}
                 fieldClass={classes.formField}
                 btnClass={classes.formBtn}
+                createCb={createUserCb}
               />
             }
           </div>
