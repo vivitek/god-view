@@ -1,27 +1,27 @@
 import { Formik, Form } from 'formik';
-import { Input, Button } from "@material-ui/core"
+import { TextField, Button } from "@material-ui/core"
 import SaveIcon from '@material-ui/icons/Save';
 
-const UserForm = () => {
+const UserForm = ({formClass, fieldClass, btnClass }) => {
   return (
-    <Formik>
-      <Form>
-        <label htmlFor="username">Username</label>
-        <Input/>
-
-        <label htmlFor="email">Email</label>
-        <Input/>
-
-        <label htmlFor="password">Password</label>
-        <Input/>
-
+    <Formik
+      initialValues={{ username: "", email: "", password: "" }}
+      onSubmit={values => {
+        alert(`annot create user with ${values}, not implemented yet.`)
+      }}
+    >
+      <Form className={formClass}>
+        <TextField name="username" className={fieldClass} label="Username"/>
+        <TextField name="email" className={fieldClass} label="Email"/>
+        <TextField type="password" name="password" className={fieldClass} label="Password"/>
         <Button
+          className={btnClass}
           variant="contained"
           color="primary"
           size="small"
           startIcon={<SaveIcon />}
+          type="submit"
         > Save </Button>
-
       </Form>
     </Formik>
   )

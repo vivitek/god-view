@@ -11,7 +11,15 @@ const GET_ROUTERS = gql`
     }
 `
 
+const DELETE_ROUTER = gql`
+    mutation($id: String!) {
+        deleteRouter(id: $id) {
+            _id
+        }
+    }
+`
 
 export {
-    GET_ROUTERS
+    GET_ROUTERS,
+    DELETE_ROUTER
 }

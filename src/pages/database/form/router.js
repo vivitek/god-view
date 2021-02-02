@@ -1,18 +1,20 @@
 import { Formik, Form } from 'formik';
-import { Input, Button } from "@material-ui/core"
+import { TextField, Button } from "@material-ui/core"
 import SaveIcon from '@material-ui/icons/Save';
 
-const RouterForm = () => {
+const RouterForm = ({formClass, fieldClass, btnClass}) => {
   return (
-    <Formik>
-      <Form>
-        <label htmlFor="name">Name</label>
-        <Input/>
-
-        <label htmlFor="url">Url</label>
-        <Input/>
-
+    <Formik
+      initialValues={{ name: "", url: "" }}
+      onSubmit={values => {
+        alert(`annot create router with ${values}, not implemented yet.`)
+      }}
+    >
+      <Form className={formClass}>
+        <TextField name="name" className={fieldClass} label="Name"/>
+        <TextField name="url" className={fieldClass} label="Url"/>
         <Button
+          className={btnClass}
           variant="contained"
           color="primary"
           size="small"
