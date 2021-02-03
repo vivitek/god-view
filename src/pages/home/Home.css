@@ -24,3 +24,11 @@
     width: 100%;
     padding-left: 5px;
 }
+
+.travis {
+    display: flex;
+}
+
+.review {
+    display: flex;
+}

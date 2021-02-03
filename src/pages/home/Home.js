@@ -39,8 +39,9 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
+              <span className="travis">Travis:</span>
+              <span className="review">Code:</span>
               <Button variant="contained">Restart</Button>
-              <span>Etat</span>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -57,8 +58,9 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
+              <span className="travis">Travis:</span>
+              <span className="review">Code:</span>
               <Button variant="contained">Restart</Button>
-              <span>Etat</span>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -75,8 +77,9 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
+              <span className="travis">Travis:</span>
+              <span className="review">Code:</span>
               <Button variant="contained">Restart</Button>
-              <span>Etat</span>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -93,8 +96,9 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
+              <span className="travis">Travis:</span>
+              <span className="review">Code:</span>
               <Button variant="contained">Restart</Button>
-              <span>Etat</span>
             </Typography>
           </AccordionDetails>
         </Accordion>
