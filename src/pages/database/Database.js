@@ -111,8 +111,8 @@ const Database = () => {
           rows={users}
           header={[
             {field: "_id", headerName: "User ID", flex: 15},
-            {field: "username", headerName: "Username", flex: 12},
-            {field: "email", headerName: "Email", flex: 12}
+            {field: "username", headerName: "Username", flex: 10},
+            {field: "email", headerName: "Email", flex: 14}
           ]}
           deleteCb={deleteUserCb}
           updateCb={updateUserCb}
