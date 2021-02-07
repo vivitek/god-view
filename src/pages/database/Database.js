@@ -3,8 +3,8 @@ import { useMutation, useQuery } from '@apollo/client'
 import { Fab, makeStyles } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import DatabaseViewer from '../../components/DatabaseViewer/DatabseViewer'
-import { GET_ROUTERS, DELETE_ROUTER, CREATE_ROUTER } from "./queries/router"
-import { GET_USERS, DELETE_USER, CREATE_USER } from "./queries/user"
+import { GET_ROUTERS, DELETE_ROUTER, CREATE_ROUTER, UPDATE_ROUTER } from "./queries/router"
+import { GET_USERS, DELETE_USER, CREATE_USER, UPDATE_USER } from "./queries/user"
 import './Database.css'
 import '../Page.css'
 import RessourceCreationForm from '../../components/RessourceCreationForm/RessourceCreationForm';
@@ -31,10 +31,12 @@ const Database = () => {
   const {loading: routerLoading, error: routerErr, data: routerData} = useQuery(GET_ROUTERS)
   const [deleteRouter] = useMutation(DELETE_ROUTER)
   const [createRouter] = useMutation(CREATE_ROUTER)
+  const [updateRouter] = useMutation(UPDATE_ROUTER)
 
   const {loading: userLoading, error: userErr, data: userData} = useQuery(GET_USERS)
   const [deleteUser] = useMutation(DELETE_USER)
   const [createUser] = useMutation(CREATE_USER)
+  const [updateUser] = useMutation(UPDATE_USER)
 
   const deleteRouterCb = (routerId) => {
     deleteRouter({variables: { id: routerId }})
@@ -47,6 +49,14 @@ const Database = () => {
         setModalOpen(false)
       })
   }
+  const updateRouterCb = (values) => {
+    const data = {
+      id: values._id,
+      url: values.url,
+      name: values.name
+    }
+    updateRouter({variables: {updateRouterData: data}})
+  }
 
   const deleteUserCb = (userId) => {
     deleteUser({variables: { id: userId }})
@@ -58,6 +68,15 @@ const Database = () => {
         setUsers(users.concat({...values, _id: d.data.createUser._id}))
         setModalOpen(false)
       })
+  }
+  const updateUserCb = (values) => {
+    const data = {
+      _id: values._id,
+      email: values.email,
+      username: values.username,
+      password: values.password
+    }
+    updateUser({variables: {userUpdateData: data}})
   }
 
   useEffect(() => {
@@ -82,6 +101,7 @@ const Database = () => {
             {field: "url", headerName: "URL", flex: 12}
           ]}
           deleteCb={deleteRouterCb}
+          updateCb={updateRouterCb}
         />}
       </div>
       <div className="card">
@@ -91,10 +111,11 @@ const Database = () => {
           rows={users}
           header={[
             {field: "_id", headerName: "User ID", flex: 15},
-            {field: "username", headerName: "Userame", flex: 12},
+            {field: "username", headerName: "Username", flex: 12},
             {field: "email", headerName: "Email", flex: 12}
           ]}
           deleteCb={deleteUserCb}
+          updateCb={updateUserCb}
         />}
       </div>
       {/* Ressource creation button */}

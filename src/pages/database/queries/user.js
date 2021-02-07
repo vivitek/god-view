@@ -28,9 +28,20 @@ const CREATE_USER = gql`
     }
 `
 
+const UPDATE_USER = gql`
+    mutation($userUpdateData: UserUpdateInput!) {
+        updateUser(userUpdateData: $userUpdateData) {
+            username
+            email
+            _id
+        }
+    }
+`
+
 
 export {
     GET_USERS,
     DELETE_USER,
-    CREATE_USER
+    CREATE_USER,
+    UPDATE_USER
 }

@@ -29,8 +29,19 @@ const CREATE_ROUTER = gql`
     }
 `
 
+const UPDATE_ROUTER = gql`
+    mutation($updateRouterData: RouterUpdateInput!) {
+        updateRouter(updateRouterData: $updateRouterData) {
+            name
+            url
+            _id
+        }
+    }
+`
+
 export {
     GET_ROUTERS,
     DELETE_ROUTER,
-    CREATE_ROUTER
+    CREATE_ROUTER,
+    UPDATE_ROUTER
 }

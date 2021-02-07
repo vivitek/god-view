@@ -2,12 +2,18 @@ import { Formik, Form, Field } from 'formik';
 import { TextField, Button } from "@material-ui/core"
 import SaveIcon from '@material-ui/icons/Save';
 
-const RouterForm = ({formClass, fieldClass, btnClass, createCb}) => {
+const RouterForm = ({
+    formClass,
+    fieldClass,
+    btnClass,
+    callback,
+    defaultValues
+  }) => {
   return (
     <Formik
-      initialValues={{ name: "", url: "" }}
+      initialValues={defaultValues || { name: "", url: "" }}
       onSubmit={values => {
-        createCb(values)
+        callback(values)
       }}
     >
       <Form className={formClass}>

@@ -83,7 +83,7 @@ const RessourceCreationForm = ({modalOpen, setModalOpen, createUserCb, createRou
                 formClass={classes.form}
                 fieldClass={classes.formField}
                 btnClass={classes.formBtn}
-                createCb={createRouterCb}
+                callback={createRouterCb}
               />
             }
             {newElement === "user" &&
@@ -91,7 +91,7 @@ const RessourceCreationForm = ({modalOpen, setModalOpen, createUserCb, createRou
                 formClass={classes.form}
                 fieldClass={classes.formField}
                 btnClass={classes.formBtn}
-                createCb={createUserCb}
+                callback={createUserCb}
               />
             }
           </div>

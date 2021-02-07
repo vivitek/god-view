@@ -2,12 +2,18 @@ import { Formik, Form, Field } from 'formik';
 import { Button, TextField } from "@material-ui/core"
 import SaveIcon from '@material-ui/icons/Save';
 
-const UserForm = ({formClass, fieldClass, btnClass, createCb }) => {
+const UserForm = ({
+    formClass,
+    fieldClass,
+    btnClass,
+    callback,
+    defaultValues
+  }) => {
   return (
     <Formik
-      initialValues={{ username: "", email: "", password: "" }}
+      initialValues={defaultValues || { username: "", email: "", password: "" }}
       onSubmit={values => {
-        createCb(values)
+        callback(values)
       }}
     >
       <Form className={formClass}>
