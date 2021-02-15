@@ -39,9 +39,18 @@ const UPDATE_ROUTER = gql`
     }
 `
 
+const ERASE_ROUTER_DATA = gql`
+    mutation($routerId: String!) {
+        deleteByRouter(routerId: $routerId) {
+            _id
+        }
+    }
+`
+
 export {
     GET_ROUTERS,
     DELETE_ROUTER,
     CREATE_ROUTER,
-    UPDATE_ROUTER
+    UPDATE_ROUTER,
+    ERASE_ROUTER_DATA
 }

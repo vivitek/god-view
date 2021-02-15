@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { Fab, makeStyles } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import DatabaseViewer from '../../components/DatabaseViewer/DatabseViewer'
-import { GET_ROUTERS, DELETE_ROUTER, CREATE_ROUTER, UPDATE_ROUTER } from "./queries/router"
+import { GET_ROUTERS, DELETE_ROUTER, CREATE_ROUTER, UPDATE_ROUTER, ERASE_ROUTER_DATA } from "./queries/router"
 import { GET_USERS, DELETE_USER, CREATE_USER, UPDATE_USER } from "./queries/user"
 import './Database.css'
 import '../Page.css'
@@ -32,6 +32,7 @@ const Database = () => {
   const [deleteRouter] = useMutation(DELETE_ROUTER)
   const [createRouter] = useMutation(CREATE_ROUTER)
   const [updateRouter] = useMutation(UPDATE_ROUTER)
+  const [eraseRouterData] = useMutation(ERASE_ROUTER_DATA)
 
   const {loading: userLoading, error: userErr, data: userData} = useQuery(GET_USERS)
   const [deleteUser] = useMutation(DELETE_USER)
@@ -56,6 +57,9 @@ const Database = () => {
       name: values.name
     }
     updateRouter({variables: {updateRouterData: data}})
+  }
+  const eraseRouterDataCb = (routerId) => {
+    eraseRouterData({variables: {routerId}})
   }
 
   const deleteUserCb = (userId) => {
@@ -92,30 +96,33 @@ const Database = () => {
     <div className="page main">
       <div className="card">
         {routerLoading && <div>Loading...</div>}
-        {routerErr && <div>Loading...</div>}
+        {routerErr && <div>An error occured...</div>}
         {!routerErr && !routerLoading && <DatabaseViewer
           rows={routers}
           header={[
-            {field: "_id", headerName: "Router ID", flex: 15},
+            {field: "_id", headerName: "Router ID", flex: 7.5},
             {field: "name", headerName: "Name", flex: 12},
             {field: "url", headerName: "URL", flex: 12}
           ]}
           deleteCb={deleteRouterCb}
           updateCb={updateRouterCb}
+          ressourceType={"router"}
+          eraseRouterData={eraseRouterDataCb}
         />}
       </div>
       <div className="card">
         {userLoading && <div>Loading...</div>}
-        {userErr && <div>Loading...</div>}
+        {userErr && <div>An error occured...</div>}
         {!userErr && !userLoading && <DatabaseViewer
           rows={users}
           header={[
-            {field: "_id", headerName: "User ID", flex: 15},
+            {field: "_id", headerName: "User ID", flex: 7.5},
             {field: "username", headerName: "Username", flex: 10},
             {field: "email", headerName: "Email", flex: 14}
           ]}
           deleteCb={deleteUserCb}
           updateCb={updateUserCb}
+          ressourceType={"user"}
         />}
       </div>
       {/* Ressource creation button */}
