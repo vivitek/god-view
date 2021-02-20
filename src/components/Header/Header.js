@@ -11,6 +11,7 @@ function Header() {
           <div className="right">
             <a className="link" href="/logs">API & Traefik logs</a>
             <a className="link" href="/statistics">Statistics</a>
+            <a className="link" href="/terminal">Terminal</a>
             <a className="link" href="/database">Database edition/view</a>
           </div>
         </header>
