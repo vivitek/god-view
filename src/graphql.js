@@ -1,8 +1,10 @@
 import {
     ApolloClient,
+    ApolloLink,
     HttpLink,
     InMemoryCache,
     split,
+    concat
 } from "@apollo/client";
 import { BASE_URL, BASE_WS } from "./constant";
 import { WebSocketLink } from "@apollo/client/link/ws";
@@ -31,8 +33,18 @@ const splitLink = split(
     httpLink
 );
 
+const auth = new ApolloLink((operation, forward) => {
+  operation.setContext({
+    headers: {
+      authorization: `Bearer ${localStorage.getItem('gv_token') || null}`,
+    }
+  });
+
+  return forward(operation);
+})
+
 const client = new ApolloClient({
-    link: splitLink,
+    link: concat(auth, splitLink),
     cache: new InMemoryCache(),
 });
 
