@@ -47,11 +47,11 @@ const Login = () => {
           onSubmit={values => {
             login({variables: {loginData: values}})
               .then(d => {
-                localStorage.setItem('gv_token', d.data.login.access_token)
+                localStorage.setItem('gv_token', d.data.loginGodView.access_token)
                 setShouldRedirect(true)
               })
               .catch(err => {
-                Swal.fire( {
+                Swal.fire({
                   title: "Don't ever try that again !",
                   icon: "error",
                   confirmButtonText: "Ok I won't..."

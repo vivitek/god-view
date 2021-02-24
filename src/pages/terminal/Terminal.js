@@ -20,7 +20,7 @@ const Terminal = () => {
 
   useEffect(() => {
     if (commandList.length) {
-      socket.emit("cmd", command)
+      socket.emit("cmd", command, {token: localStorage.getItem('gv_token')})
       setCommand('')
     }
   }, [commandList])
