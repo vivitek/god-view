@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react'
-import socketIOClient from "socket.io-client";
+import io from "socket.io-client";
 import './Terminal.css'
 import '../Page.css'
 
 const ENDPOINT = "WONT_GIVE_IT_TO_YOU"
+const socket = io(ENDPOINT).connect()
 
 const Terminal = () => {
   const [commandList, setCommandList] = useState([])
   const [command, setCommand] = useState("")
-  const socket = socketIOClient(ENDPOINT)
 
   useEffect(() => {
-    socket.on('res', data => {
+    socket.off('res').on('res', data => {
       const d = [...commandList]
+      if (!d.length) return
       d[d.length - 1].output = data
-      setCommandList(d)
+      setCommandList([...d])
     })
   })
 
   useEffect(() => {
-    if (commandList.length) {
-      socket.emit("cmd", command, {token: localStorage.getItem('gv_token')})
-      setCommand('')
-    }
+    if (!command) return
+    socket.emit('cmd', command, {token: localStorage.getItem('gv_token')})
+    setCommand('')
   }, [commandList])
 
   const onSend = () => {
