@@ -12,9 +12,7 @@ const RouterForm = ({
   return (
     <Formik
       initialValues={defaultValues || { name: "", url: "" }}
-      onSubmit={values => {
-        callback(values)
-      }}
+      onSubmit={callback}
     >
       <Form className={formClass}>
         <Field

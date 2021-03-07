@@ -12,9 +12,7 @@ const UserForm = ({
   return (
     <Formik
       initialValues={defaultValues || { username: "", email: "", password: "" }}
-      onSubmit={values => {
-        callback(values)
-      }}
+      onSubmit={callback}
     >
       <Form className={formClass}>
         <Field
