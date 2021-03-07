@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import './Terminal.css'
 import '../Page.css'
 
-const socket = io(process.end.ENDPOINT).connect()
+const socket = io(process.env.ENDPOINT).connect()
 
 const Terminal = () => {
   const [commandList, setCommandList] = useState([])
