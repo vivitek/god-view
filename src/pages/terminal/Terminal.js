@@ -23,7 +23,7 @@ const Terminal = () => {
     if (!command) return
     socket.emit('cmd', command, {token: localStorage.getItem('gv_token')})
     setCommand('')
-  }, [commandList])
+  }, [commandList]) //  eslint-disable-line
 
   const onSend = () => {
     if (command === 'clear') {
