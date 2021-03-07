@@ -6,7 +6,6 @@ import { ApolloProvider } from '@apollo/client';
 import { client } from './graphql';
 
 function App() {
-  // localStorage.clear()
   return (
     <div className="App">
       <Header />
