@@ -3,6 +3,6 @@ const BASE_URL =
     ? "http://localhost:3000"
     : "https://api.server.vincipit.com";
 
-  const BASE_WS = BASE_URL.replace(/^https?/, "ws")
+  const BASE_WS = BASE_URL.replace(/^https?/, "wss")
 
 export { BASE_URL, BASE_WS }
