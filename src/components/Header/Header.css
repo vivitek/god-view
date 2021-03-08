@@ -3,11 +3,34 @@
     color: white;
     height: 8vh;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 }
 
-a {
+.left {
+    width: 20%;
+}
+
+.logo {
+    height: 5vh;
+    padding-left: 10px;
+    left: 0;
+}
+
+.middle {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.right {
+    width: 15%;
+    padding-right: 40px;
+    text-align: right;
+}
+
+
+.link {
     text-decoration: none;
     color: white;
     font-size: larger;
