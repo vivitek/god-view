@@ -1,0 +1,13 @@
+language: node_js
+os:
+  - 'linux'
+node_js:
+  - '12'
+branches:
+  only:
+  - '/.*/'
+cache:
+  directories:
+  - node_modules
+script:
+    - npm run build
