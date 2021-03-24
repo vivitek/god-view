@@ -6,6 +6,8 @@ node_js:
 branches:
   only:
   - '/.*/'
+install:
+    - yarn
 cache:
   directories:
   - node_modules
