@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client"
-import {Card, CardContent, makeStyles } from "@material-ui/core"
+import { Card, CardContent, makeStyles, CircularProgress } from "@material-ui/core"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { GET_DEVICE_BY_UUID } from "../../pages/BalenaDevice/queries/device"
@@ -17,6 +17,12 @@ const useStyles = makeStyles({
     height: "calc(92vh - 20px)",
     display: "flex",
     padding: "10px"
+  },
+  loading: {
+    height: "92vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   column: {
     display: "flex",
@@ -45,12 +51,12 @@ const BalenaDeviceDetails = () => {
   const classes = useStyles()
   const { uuid } = useParams()
   const [device, setDevice] = useState()
-  const {loading: loadDevice, err: errDevice, data: dataDevice} = useQuery(GET_DEVICE_BY_UUID, {variables: {uuid}})
+  const {loading, err, data} = useQuery(GET_DEVICE_BY_UUID, {variables: {uuid}})
 
   useEffect(() => {
-    if (dataDevice)
-      setDevice(dataDevice.getBalenaDeviceByUuid)
-  }, [dataDevice])
+    if (data)
+      setDevice(data.getBalenaDeviceByUuid)
+  }, [data])
 
   const getChartStyle = (current, max) => {
     const percentage = current * 100 / max
@@ -84,8 +90,12 @@ const BalenaDeviceDetails = () => {
 
   return (
     <>
-      {loadDevice && <div>Loading...</div>}
-      {errDevice && <div>An error occured, please fix me</div>}
+      {loading &&
+        <div className={classes.loading} >
+          {<CircularProgress size={100}/>}
+        </div>
+      }
+      {err && <div>An error occured, please fix me</div>}
       {device &&
         <div className={classes.container}>
           <div className={classes.column}>
@@ -96,7 +106,11 @@ const BalenaDeviceDetails = () => {
             </Card>
             <Card className={classes.smallCard}>
               <CardContent className={classes.card}>
-                  env var
+                  {/* {device.env.map(envVar => {
+                    return (
+                    <span id={envVar.id}> {`${envVar.name}: ${envVar.value}`}</span>
+                    )
+                  })} */}
               </CardContent>
             </Card>
           </div>

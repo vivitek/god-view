@@ -44,11 +44,27 @@ const GET_DEVICE_BY_UUID = gql`
       storage_total
       cpu_temp
       cpu_usage
+      env {
+        id
+        name
+        value
+      }
+    }
+  }
+`
+
+const GET_ENV_VAR = gql`
+  query($id: String!) {
+    getEnvVarByDeviceId(id: $id) {
+      id
+      name
+      value
     }
   }
 `
 
 export {
   GET_DEVICES,
-  GET_DEVICE_BY_UUID
+  GET_DEVICE_BY_UUID,
+  GET_ENV_VAR
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_DEVICES } from './queries/device'
 import BalenaDeviceCard from '../../components/BalenaDeviceCard/BalenaDeviceCard'
+import { CircularProgress } from "@material-ui/core"
 
 
 const BalenaDevices = () => {
@@ -18,7 +19,16 @@ const BalenaDevices = () => {
 
   return (
     <div className="balenaDevice" style={{paddingTop: "20px"}}>
-      {loading && <div>Loading...</div>}
+      {loading &&
+        <div style={{
+          height: "92vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }} >
+          {<CircularProgress size={100}/>}
+        </div>
+      }
       {err && <div>An error occured, please fix me</div>}
       {devices && devices.map((device, i) => {
         return (
