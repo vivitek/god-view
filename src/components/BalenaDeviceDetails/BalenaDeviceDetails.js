@@ -110,12 +110,7 @@ const BalenaDeviceDetails = () => {
             </Card>
             <Card className={classes.smallCard}>
               <CardContent className={classes.card}>
-                env var
-                  {/* {device.env.map(envVar => {
-                    return (
-                    <span id={envVar.id}> {`${envVar.name}: ${envVar.value}`}</span>
-                    )
-                  })} */}
+                env
               </CardContent>
             </Card>
           </div>
