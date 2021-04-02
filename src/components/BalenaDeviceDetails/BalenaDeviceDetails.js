@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client"
 import {Card, CardContent, makeStyles } from "@material-ui/core"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { GET_DEVICE_BY_UUID, GET_ENV_VAR } from "../../pages/BalenaDevice/queries/device"
+import { GET_DEVICE_BY_UUID } from "../../pages/BalenaDevice/queries/device"
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import { MAPBOX_API_KEY } from "../../constant"
 import "./BalenaDeviceDetails.css"
@@ -96,8 +96,6 @@ const BalenaDeviceDetails = () => {
             </Card>
             <Card className={classes.smallCard}>
               <CardContent className={classes.card}>
-                {loadEnvVar && <div>Loading</div>}
-                {errEnvVar && <div>An error occured, please fix me</div>}
                   env var
               </CardContent>
             </Card>
