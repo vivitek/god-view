@@ -95,17 +95,22 @@ const BalenaDeviceDetails = () => {
           {<CircularProgress size={100}/>}
         </div>
       }
-      {err && <div>An error occured, please fix me</div>}
+      {err &&
+        <div className={classes.loading}>
+          <img alt="error" src="https://www.flaticon.com/svg/vstatic/svg/463/463612.svg?token=exp=1617383749~hmac=3cf44afd0d39b921c07e913d14ec82fe" />
+        </div>
+        }
       {device &&
         <div className={classes.container}>
           <div className={classes.column}>
             <Card className={classes.bigCard}>
-              <CardContent>
+              <CardContent className={classes.card}>
                 info
               </CardContent>
             </Card>
             <Card className={classes.smallCard}>
               <CardContent className={classes.card}>
+                env var
                   {/* {device.env.map(envVar => {
                     return (
                     <span id={envVar.id}> {`${envVar.name}: ${envVar.value}`}</span>

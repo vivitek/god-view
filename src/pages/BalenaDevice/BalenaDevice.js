@@ -25,11 +25,20 @@ const BalenaDevices = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center"
-        }} >
+        }}>
           {<CircularProgress size={100}/>}
         </div>
       }
-      {err && <div>An error occured, please fix me</div>}
+      {err &&
+        <div style={{
+          height: "92vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
+          <img alt="error" src="https://www.flaticon.com/svg/vstatic/svg/463/463612.svg?token=exp=1617383749~hmac=3cf44afd0d39b921c07e913d14ec82fe" />
+        </div>
+      }
       {devices && devices.map((device, i) => {
         return (
           <BalenaDeviceCard key={device.id} device={device}/>
