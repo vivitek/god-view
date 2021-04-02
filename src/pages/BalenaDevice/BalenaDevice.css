@@ -1,0 +1,7 @@
+.balenaDevice {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: calc(92vh - 20px);
+  overflow-y: scroll;
+}

@@ -1,6 +1,7 @@
 import { Switch, Route, Redirect } from "react-router-dom"
 import Home from "./pages/home/Home"
-import Logs  from "./pages/logs/Logs"
+import BalenaDevices  from "./pages/BalenaDevice/BalenaDevice"
+import BalenaDeviceDetails from "./components/BalenaDeviceDetails/BalenaDeviceDetails"
 import Stat  from "./pages/stats/Stat"
 import Database from "./pages/database/Database"
 import Terminal from "./pages/terminal/Terminal"
@@ -21,7 +22,8 @@ const Router = () =>{
     <Switch>
       <Route path="/login" exact component={Login}/>
       <PrivateRoute path="/" exact component={Home}/>
-      <PrivateRoute path="/logs" exact component={Logs}/>
+      <PrivateRoute path="/balena" exact component={BalenaDevices}/>
+      <PrivateRoute path="/balena/:uuid" exact component={BalenaDeviceDetails} />
       <PrivateRoute path="/statistics" exact component={Stat}/>
       <PrivateRoute path="/database" exact component={Database}/>
       <PrivateRoute path="/terminal" exact component={Terminal}/>
