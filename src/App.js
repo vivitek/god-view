@@ -4,6 +4,8 @@ import './App.css';
 import { BrowserRouter } from "react-router-dom"
 import { ApolloProvider } from '@apollo/client';
 import { client } from './graphql';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
             <Router />
           </ApolloProvider>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }
