@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Button from '@material-ui/core/Button';
 import './Home.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +21,30 @@ const useStyles = makeStyles((theme) => ({
 
 function Home() {
   const classes = useStyles();
+  const [xana, setXana] = useState(null);
+  const [serv, setServ] = useState(null);
+  const [app, setApp] = useState(null);
+
+  useEffect(() => {
+    fetch("https://api.xana.vincipit.com/")
+      .then(
+        (xana) => {
+          setXana(xana);
+        }
+      )
+    fetch("https://api.server.vincipit.com/")
+      .then(
+        (serv) => {
+          setServ(serv);
+        }
+      )
+    fetch("https://dashboard.vincipit.com/")
+      .then(
+        (app) => {
+          setApp(app);
+        }
+      )  
+  }, [])
 
   return (
     <div className="homePage">
@@ -33,7 +56,11 @@ function Home() {
             id="panel1a-header"
           >
             <Typography className={classes.heading}>
-              <div id="cercle"></div>
+              {serv ? (
+                <div className="cercleG"></div>
+              ) : (
+                <div className="cercleR"></div>
+              )} 
               <span className="title">API Vivi Serve</span>
             </Typography>
           </AccordionSummary>
@@ -41,7 +68,6 @@ function Home() {
             <Typography>
               <span className="travis">Travis:</span>
               <span className="review">Code:</span>
-              <Button variant="contained">Restart</Button>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -52,7 +78,11 @@ function Home() {
             id="panel2a-header"
           >
             <Typography className={classes.heading}>
-              <div id="cercle"></div>
+            {app ? (
+                <div className="cercleG"></div>
+              ) : (
+                <div className="cercleR"></div>
+              )} 
               <span className="title">Monitoring APP</span>
             </Typography>
           </AccordionSummary>
@@ -60,7 +90,6 @@ function Home() {
             <Typography>
               <span className="travis">Travis:</span>
               <span className="review">Code:</span>
-              <Button variant="contained">Restart</Button>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -71,7 +100,11 @@ function Home() {
             id="panel2a-header"
           >
             <Typography className={classes.heading}>
-              <div id="cercle"></div>
+            {xana ? (
+                <div className="cercleG"></div>
+              ) : (
+                <div className="cercleR"></div>
+              )} 
               <span className="title">API Xana Serve</span>
             </Typography>
           </AccordionSummary>
@@ -79,7 +112,6 @@ function Home() {
             <Typography>
               <span className="travis">Travis:</span>
               <span className="review">Code:</span>
-              <Button variant="contained">Restart</Button>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -98,7 +130,6 @@ function Home() {
             <Typography>
               <span className="travis">Travis:</span>
               <span className="review">Code:</span>
-              <Button variant="contained">Restart</Button>
             </Typography>
           </AccordionDetails>
         </Accordion>

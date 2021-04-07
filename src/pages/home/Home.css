@@ -11,11 +11,20 @@
     overflow-y: scroll;
 }
 
-#cercle {
+.cercleG {
     width: 20px;
     height: 20px;
     border-radius: 20px;
     background: green;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.cercleR {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background: red;
     padding-left: 5px;
     padding-right: 5px;
 }
