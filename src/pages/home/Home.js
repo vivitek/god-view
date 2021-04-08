@@ -115,24 +115,6 @@ function Home() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>
-              <div id="cercle"></div>
-              <span className="title">Balena OS</span>
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <span className="travis">Travis:</span>
-              <span className="review">Code:</span>
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
       </div>
     </div>
   );
