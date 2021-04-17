@@ -26,12 +26,6 @@ function Home() {
   const [app, setApp] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.xana.vincipit.com/")
-      .then(
-        (xana) => {
-          setXana(xana);
-        }
-      )
     fetch("https://api.server.vincipit.com/")
       .then(
         (serv) => {
@@ -44,6 +38,13 @@ function Home() {
           setApp(app);
         }
       )  
+    fetch("https://api.xana.vincipit.com/")
+      .then(
+        (xana) => {
+          setXana(xana);
+        }
+      )
+    
   }, [])
 
   return (
@@ -61,13 +62,13 @@ function Home() {
               ) : (
                 <div className="cercleR"></div>
               )} 
-              <span className="title">API Vivi Serve</span>
+              <span className="title">Backend</span>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <span className="travis">Travis:</span>
-              <span className="review">Code:</span>
+              <img src={"https://api.travis-ci.com/vivitek/backend.svg?branch=master"}/>
+              <img src={"https://codecov.io/gh/vivitek/backend/branch/master/graph/badge.svg"} />
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -83,13 +84,13 @@ function Home() {
               ) : (
                 <div className="cercleR"></div>
               )} 
-              <span className="title">Monitoring APP</span>
+              <span className="title">Dashboard</span>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <span className="travis">Travis:</span>
-              <span className="review">Code:</span>
+              <img src={"https://api.travis-ci.com/vivitek/dashboard.svg?branch=master"}/>
+              <img src={"https://codecov.io/gh/vivitek/dashboard/branch/master/graph/badge.svg"}/>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -110,8 +111,26 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <span className="travis">Travis:</span>
-              <span className="review">Code:</span>
+              <img src={"https://api.travis-ci.com/vivitek/god-view.svg?branch=master"}/>
+              <img src={"https://codecov.io/gh/vivitek/god-view/branch/master/graph/badge.svg"}/>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className={classes.heading}>
+              <div className="cercleGr"></div>
+              <span className="title">Box</span>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <img src={"https://api.travis-ci.com/vivitek/box.svg?branch=master"}/>
+              <img src={"https://codecov.io/gh/vivitek/box/branch/master/graph/badge.svg"}/>
             </Typography>
           </AccordionDetails>
         </Accordion>
