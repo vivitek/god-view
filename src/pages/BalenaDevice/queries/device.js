@@ -23,7 +23,6 @@ const GET_DEVICE_BY_UUID = gql`
       id
       device_name
       uuid
-      status
       is_online
       is_connected_to_vpn
       last_connectivity_event

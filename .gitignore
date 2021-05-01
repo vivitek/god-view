@@ -3,6 +3,7 @@
 
 build
 .eslint*
+yarn.lock
 
 ### react ###
 .DS_*

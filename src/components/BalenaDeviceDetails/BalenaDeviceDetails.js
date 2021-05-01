@@ -1,11 +1,13 @@
 import { useQuery } from "@apollo/client"
-import { Card, CardContent, makeStyles, CircularProgress } from "@material-ui/core"
+import { Card, CardContent, makeStyles, CircularProgress, Grid, Icon } from "@material-ui/core"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { GET_DEVICE_BY_UUID } from "../../pages/BalenaDevice/queries/device"
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import { MAPBOX_API_KEY } from "../../constant"
 import "./BalenaDeviceDetails.css"
+import * as moment from "moment"
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_API_KEY
@@ -13,10 +15,9 @@ const Map = ReactMapboxGl({
 
 const useStyles = makeStyles({
   container: {
-    width: "calc(100% - 20px)",
-    height: "calc(92vh - 20px)",
+    width: "100%",
+    height: "92vh",
     display: "flex",
-    padding: "10px"
   },
   loading: {
     height: "92vh",
@@ -32,7 +33,7 @@ const useStyles = makeStyles({
   },
   card: {
     display: "flex",
-    height: "calc(100% - 40px)",
+    height: "100%",
     alignItems: "center",
     backgroundColor: "#343332",
     color: "white"
@@ -44,8 +45,41 @@ const useStyles = makeStyles({
   smallCard: {
     margin: "10px",
     height: "40%"
+  },
+  flexRow : {
+    display: 'flex',
+    justifyContent: "space-between"
+  },
+  flexColumn: {
+    display: "flex",
+    flexDirection: "column",
+    textAlign: "center"
   }
 })
+
+
+const InfoDisplay = ({title, value, size, displayCopyBtn = false, targetedLength}) => {
+  const classes = useStyles()
+  return (
+    <Grid item xs={size}>
+      <div className={classes.flexColumn}>
+        <span style={{fontWeight: "bolder"}}>{title}</span>
+        <div style={{display: "flex", alignItems: "center", alignSelf: "center"}}>
+          <span> {
+            targetedLength
+              ? value.substring(0, targetedLength).concat('...')
+              : value
+          } </span>
+          {displayCopyBtn && <Icon
+            style={{marginLeft: "5px", height: "16px", width: "16px", cursor: "pointer"}}
+            component={FileCopyOutlinedIcon}
+            onClick={() =>  navigator.clipboard.writeText(value)}
+          />}
+        </div>
+      </div>
+    </Grid>
+  )
+}
 
 const BalenaDeviceDetails = () => {
   const classes = useStyles()
@@ -83,9 +117,7 @@ const BalenaDeviceDetails = () => {
     else
       color = "#ea5858"
 
-    return {
-      color,
-    }
+    return { color }
   }
 
   return (
@@ -104,8 +136,47 @@ const BalenaDeviceDetails = () => {
         <div className={classes.container}>
           <div className={classes.column}>
             <Card className={classes.bigCard}>
-              <CardContent className={classes.card}>
-                info
+              <CardContent className={[classes.card, classes.flexColumn].join(' ')}>
+                <div style={{width: "100%", height: "30%", borderBottom: "1px solid white", display: "flex", flexDirection: 'column', textAlign: "left", fontSize: "large"}}>
+                  <div className={classes.smallCard} style={{margin: "0", textAlign: 'center', fontSize: "larger", fontWeight: "bold", textTransform: "uppercase"}}>
+                    {device.device_name}
+                  </div>
+                  <div style={{height: "70%", width: "95%", display: "flex", alignItems: "center", justifyContent: "space-between", textAlign: "center", alignSelf: "center"}}>
+                    <InfoDisplay title={"Is online"} value={device.is_online ? "Online" : "Offline"}/>
+                    <InfoDisplay title={"Uuid"} value={device.uuid} displayCopyBtn={true} targetedLength={10}/>
+                    <InfoDisplay title={"Id"} value={device.id} displayCopyBtn={true}/>
+                  </div>
+                </div>
+                <div style={{width: "100%", height: "60%", margin: "10px", display: "flex", flexDirection: "column", justifyContent: "space-around"}}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                      <div className={classes.flexColumn}>
+                        <span style={{fontWeight: "bold"}}>Mac addresses</span>
+                        {device.mac_address.split(' ').map((addr, idx) => (
+                          <div style={{display: "flex", alignItems: "center", alignSelf: "center"}}>
+                            <span key={idx}>{addr}</span>
+                            <Icon
+                              style={{marginLeft: "5px", height: "16px", width: "16px", cursor: "pointer"}}
+                              component={FileCopyOutlinedIcon}
+                              onClick={() =>  navigator.clipboard.writeText(addr)}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </Grid>
+                    <InfoDisplay title={"VPN address"} value={device.vpn_address || "Offline"} size={4} displayCopyBtn={device.vpn_address ? true : false}/>
+                    <InfoDisplay title={"Public address"} value={device.public_address} size={4}  displayCopyBtn={true}/>
+                  </Grid>
+                  <Grid container spacing={2}>
+                    <InfoDisplay title={"Os version"} value={device.os_version} size={4}  displayCopyBtn={true}/>
+                    <InfoDisplay title={"Os variant"} value={device.os_variant} size={4}/>
+                    <InfoDisplay title={"Web accessible"} value={device.is_web_accessible ? "true" : "false"} size={4}/>
+                  </Grid>
+                  <Grid container spacing={2}>
+                    <InfoDisplay title={"Last seen"} value={moment(device.last_connectivity_event).format('DD/MM/YYYY HH:mm')} size={6}/>
+                    <InfoDisplay title={"Created at"} value={moment(device.created_at).format('DD/MM/YYY HH:mm')} size={6}/>
+                  </Grid>
+                </div>
               </CardContent>
             </Card>
             <Card className={classes.smallCard}>
@@ -145,14 +216,14 @@ const BalenaDeviceDetails = () => {
             </Card>
             <Card className={classes.bigCard}>
               <Map
-                style={`mapbox://styles/mapbox/dark-v10`}
-                containerStyle={{
-                  height: '100%',
-                  width: '100%'
-                }}
-                zoom={[12]}
-                center={[device.longitude, device.latitude]}
-              >
+                 style={`mapbox://styles/mapbox/dark-v10`}
+                 containerStyle={{
+                   height: '100%',
+                   width: '100%'
+                 }}
+                 zoom={[12]}
+                 center={[device.longitude, device.latitude]}
+               >
                 <Marker coordinates={[device.longitude, device.latitude]} anchor="bottom">
                   <img src="/marker.png" alt="marker" style={{width: "32px", height: "32px"}}/>
                 </Marker>

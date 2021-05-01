@@ -18,7 +18,7 @@ const BalenaDevices = () => {
   }, [data])
 
   return (
-    <div className="balenaDevice" style={{paddingTop: "20px"}}>
+    <div className="balenaDevice" style={{marginTop: "20px", overflowY: "auto"}}>
       {loading &&
         <div style={{
           height: "92vh",
