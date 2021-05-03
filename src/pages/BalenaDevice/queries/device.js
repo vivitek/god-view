@@ -62,8 +62,28 @@ const GET_ENV_VAR = gql`
   }
 `
 
+const DELETE_ENV_VAR_BY_ID = gql`
+  mutation($id: String!) {
+    delEnvVarOnBalenaDevice(id: $id)
+  }
+`
+
+const CREATE_ENV_VAR = gql`
+  mutation($uuid: String!, $key: String!, $value: String!) {
+    setEnvVarOnBalenaDevice(
+      uuid: $uuid,
+      key: $key,
+      value: $value,
+    ) {
+      id
+    }
+  }
+`
+
 export {
   GET_DEVICES,
   GET_DEVICE_BY_UUID,
-  GET_ENV_VAR
+  GET_ENV_VAR,
+  DELETE_ENV_VAR_BY_ID,
+  CREATE_ENV_VAR
 }

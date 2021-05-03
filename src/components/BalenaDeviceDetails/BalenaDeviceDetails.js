@@ -1,13 +1,19 @@
-import { useQuery } from "@apollo/client"
-import { Card, CardContent, makeStyles, CircularProgress, Grid, Icon } from "@material-ui/core"
+import { useMutation, useQuery } from "@apollo/client"
+import { Card, CardContent, makeStyles, CircularProgress, Grid, Icon, Fab, Modal, Button, TextField } from "@material-ui/core"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { GET_DEVICE_BY_UUID } from "../../pages/BalenaDevice/queries/device"
+import { GET_DEVICE_BY_UUID, DELETE_ENV_VAR_BY_ID, CREATE_ENV_VAR } from "../../pages/BalenaDevice/queries/device"
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import { MAPBOX_API_KEY } from "../../constant"
 import "./BalenaDeviceDetails.css"
 import * as moment from "moment"
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import AddIcon from "@material-ui/icons/Add"
+import SaveIcon from '@material-ui/icons/Save';
+import Swal from "sweetalert2"
+import { toast } from "react-toastify"
+import { Formik, Form, Field } from "formik"
 
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_API_KEY
@@ -54,9 +60,28 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     textAlign: "center"
+  },
+  fabTopRight: {
+    position: "absolute",
+    right: "0",
+    top: "0",
+    margin: "10px"
+  },
+  modal: {
+    backgroundColor: "white",
+    border: "none",
+    position: "absolute",
+    width: "40%",
+    height: "30%",
+    top: "35%",
+    left: "30%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center"
+
   }
 })
-
 
 const InfoDisplay = ({title, value, size, displayCopyBtn = false, targetedLength}) => {
   const classes = useStyles()
@@ -85,7 +110,10 @@ const BalenaDeviceDetails = () => {
   const classes = useStyles()
   const { uuid } = useParams()
   const [device, setDevice] = useState()
-  const {loading, err, data} = useQuery(GET_DEVICE_BY_UUID, {variables: {uuid}})
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const {loading, err, data, refetch} = useQuery(GET_DEVICE_BY_UUID, {variables: {uuid}})
+  const [deleteEnvVar] = useMutation(DELETE_ENV_VAR_BY_ID)
+  const [createEnvVar] = useMutation(CREATE_ENV_VAR)
 
   useEffect(() => {
     if (data)
@@ -180,8 +208,71 @@ const BalenaDeviceDetails = () => {
               </CardContent>
             </Card>
             <Card className={classes.smallCard}>
-              <CardContent className={classes.card}>
-                env
+              <CardContent className={classes.card} style={{flexDirection: "column", position: "relative"}}>
+                <div style={{fontSize: "larger", height: "15%"}}> Environment variable </div>
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  size="small"
+                  className={classes.fabTopRight}
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <AddIcon />
+                </Fab>
+                <div className="envVar" style={{width: "95%", height: "75%", overflowY: "scroll", overflowX: "hidden"}}>
+                  <Grid container spacing={2}>
+                    {device.env.map((e, idx) => (
+                      <>
+                        <Grid item xs={5} style={{textAlign: "left", textTransform: "uppercase"}}> {e.name} </Grid>
+                        <Grid item xs={5} style={{textAlign: "left"}}> {e.value} </Grid>
+                        <Grid item xs={2}>
+                          <Icon
+                            style={{marginLeft: "5px", height: "16px", width: "16px", cursor: "pointer"}}
+                            component={DeleteOutlineOutlinedIcon}
+                            onClick={() => {
+                              Swal.fire({
+                                title: "Are you sure?",
+                                text: "You won't be able to revert this!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: '#f50057',
+                                confirmButtonText: 'Yes, delete it!',
+                                cancelButtonColor: '#3085d6',
+                              }).then((result) => {
+                                if (result.isConfirmed) {
+                                  deleteEnvVar({variables: {id: e.id.toString()}}).then(async res => {
+                                    if (res.data.delEnvVarOnBalenaDevice === "OK") {
+                                      await refetch()
+                                      toast("It's alright", {
+                                        type: "success",
+                                        position: toast.POSITION.BOTTOM_RIGHT,
+                                        style: {
+                                          backgroundColor: "#3fb53f"
+                                        }
+                                      });
+                                    } else
+                                      toast("An error occured", {
+                                        type: "error",
+                                        position: toast.POSITION.BOTTOM_RIGHT,
+                                        style: {
+                                          backgroundColor: "#b53f3f"
+                                        }
+                                      });
+                                  })
+                                }
+                              })
+                            }}
+                          />
+                          <Icon
+                            style={{marginLeft: "5px", height: "16px", width: "16px", cursor: "pointer"}}
+                            component={FileCopyOutlinedIcon}
+                            onClick={() => navigator.clipboard.writeText(`${e.name.toUpperCase()}=${e.value}`)}
+                          />
+                        </Grid>
+                      </>
+                    ))}
+                  </Grid>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -232,6 +323,79 @@ const BalenaDeviceDetails = () => {
           </div>
         </div>
       }
+    <Modal
+      open={isModalOpen}
+      onBackdropClick={() => setIsModalOpen(false)}
+    >
+      <div className={classes.modal}>
+        <div style={{fontSize: "x-large", marginTop: "-10px"}}> Add an environment varible </div>
+        <div>
+          <Formik
+            initialValues={{key: "", value: ""}}
+            onSubmit={(values) => {
+              createEnvVar({variables: {
+                key: values.key.trim().toUpperCase().replace(/[ -]/g, "_"),
+                value: values.value.trim(),
+                uuid: device.uuid
+              }}).then(async res => {
+                setIsModalOpen(false)
+                await refetch()
+                if (res.data.setEnvVarOnBalenaDevice.id) {
+                  toast("It's alright", {
+                    type: "success",
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    style: {
+                      backgroundColor: "#3fb53f"
+                    }
+                  })
+                } else
+                  toast("An error occured", {
+                    type: "error",
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    style: {
+                      backgroundColor: "#b53f3f"
+                    }
+                  });
+              })
+            }}
+          >
+            <Form style={{display: "flex", flexDirection: "column"}}>
+              <div style={{display: "flex", marginBottom: "35px"}}>
+                <Field
+                  id="key"
+                  name="key"
+                  label="Name"
+                  variant="outlined"
+                  style={{marginRight: "4%"}}
+                  as={TextField}
+                />
+                <Field
+                  id="value"
+                  name="value"
+                  label="Value"
+                  variant="outlined"
+                  as={TextField}
+                />
+              </div>
+              <div style={{display: "flex", justifyContent: "flex-end"}}>
+                <Button
+                  variant="outlined"
+                  style={{margin: "10px"}}
+                  onClick={() => {setIsModalOpen(false)}}
+                > Cancel </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<SaveIcon />}
+                  style={{margin: "10px"}}
+                  type="submit"
+                > Submit </Button>
+              </div>
+            </Form>
+          </Formik>
+        </div>
+      </div>
+    </Modal>
     </>
   )
 }
