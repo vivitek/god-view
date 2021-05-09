@@ -224,7 +224,7 @@ const BalenaDeviceDetails = () => {
                     {device.env.map((e, idx) => (
                       <>
                         <Grid item xs={5} style={{textAlign: "left", textTransform: "uppercase"}}> {e.name} </Grid>
-                        <Grid item xs={5} style={{textAlign: "left"}}> {e.value} </Grid>
+                        <Grid item xs={5} style={{textAlign: "left"}}> {e.value.length <= 40 ? e.value : e.value.substring(0, 40).concat('...')} </Grid>
                         <Grid item xs={2}>
                           <Icon
                             style={{marginLeft: "5px", height: "16px", width: "16px", cursor: "pointer"}}
