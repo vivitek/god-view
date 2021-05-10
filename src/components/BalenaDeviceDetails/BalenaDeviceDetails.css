@@ -1,0 +1,58 @@
+.semi-donut{
+  --percentage: 0;
+  --fill: #ff0;
+  width: 300px;
+  height: 150px;
+  position: relative;
+  color: black;
+  color: var(--fill);
+  font-size: 22px;
+  font-weight: 600;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-sizing : border-box;
+  transform: scale(0.9);
+
+}
+
+.semi-donut:after {
+  content: '';
+  width: 300px;
+  height: 300px;
+  border:50px solid;
+  border-color : rgba(0,0,0,0.15) rgba(0,0,0,0.15) var(--fill) var(--fill);
+  position: absolute;
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+  box-sizing : border-box;
+  transform: rotate(calc(1deg * (-45 + var(--percentage) * 1.8)));
+}
+
+.title {
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+
+}
+
+.envVar::-webkit-scrollbar {
+  background-color: #343332;
+  width: 16px;
+}
+
+.envVar::-webkit-scrollbar-track {
+  background-color: #343332;
+}
+
+.envVar::-webkit-scrollbar-thumb {
+  background-color: #babac0;
+  border-radius: 16px;
+  border: 4px solid #343332;
+}
+
+.envVar::-webkit-scrollbar-button {
+  display: none;
+}

@@ -2,7 +2,7 @@ language: node_js
 os:
   - 'linux'
 node_js:
-  - '15'
+  - '16'
 branches:
   only:
   - '/.*/'
@@ -12,5 +12,5 @@ cache:
   directories:
   - node_modules
 script:
-    - npm i
-    - npm run build
+    - yarn install
+    - yarn build
