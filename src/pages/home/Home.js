@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -19,121 +19,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function createData(Service, Title, CodeCov, Travis) {
+  return {Service, Title, CodeCov, Travis};
+}
+
+const rows = [
+  createData(1, 'Serveur', 'https://codecov.io/gh/vivitek/backend/branch/master/graph/badge.svg', 'https://api.travis-ci.com/vivitek/backend.svg?branch=master'),
+  createData(1, 'Interface Utilisateur', 'https://codecov.io/gh/vivitek/dashboard/branch/master/graph/badge.svg', 'https://api.travis-ci.com/vivitek/dashboard.svg?branch=master'),
+  createData(1, 'Xana', 'https://codecov.io/gh/vivitek/god-view/branch/master/graph/badge.svg', 'https://api.travis-ci.com/vivitek/god-view.svg?branch=master'),
+  createData(null, 'Box', 'https://codecov.io/gh/vivitek/box/branch/master/graph/badge.svg', 'https://api.travis-ci.com/vivitek/box.svg?branch=master'),
+];
+
 function Home() {
   const classes = useStyles();
-  const [xana, setXana] = useState(null);
-  const [serv, setServ] = useState(null);
-  const [app, setApp] = useState(null);
-
-  useEffect(() => {
-    fetch("https://api.server.vincipit.com/")
-      .then(
-        (serv) => {
-          setServ(serv);
-        }
-      )
-    fetch("https://dashboard.vincipit.com/")
-      .then(
-        (app) => {
-          setApp(app);
-        }
-      )  
-    fetch("https://api.xana.vincipit.com/")
-      .then(
-        (xana) => {
-          setXana(xana);
-        }
-      )
-    
-  }, [])
 
   return (
     <div className="homePage">
       <div className={classes.root}>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>
-              {serv ? (
-                <div className="cercleG"></div>
-              ) : (
-                <div className="cercleR"></div>
-              )} 
-              <span className="title">Backend</span>
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <img alt="travis" src={"https://api.travis-ci.com/vivitek/backend.svg?branch=master"}/>
-              <img alt="codecov" src={"https://codecov.io/gh/vivitek/backend/branch/master/graph/badge.svg"} />
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>
-            {app ? (
-                <div className="cercleG"></div>
-              ) : (
-                <div className="cercleR"></div>
-              )} 
-              <span className="title">Dashboard</span>
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <img alt="travis" src={"https://api.travis-ci.com/vivitek/dashboard.svg?branch=master"}/>
-              <img alt="codecov" src={"https://codecov.io/gh/vivitek/dashboard/branch/master/graph/badge.svg"}/>
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>
-            {xana ? (
-                <div className="cercleG"></div>
-              ) : (
-                <div className="cercleR"></div>
-              )} 
-              <span className="title">API Xana Serve</span>
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <img alt="travis" src={"https://api.travis-ci.com/vivitek/god-view.svg?branch=master"}/>
-              <img alt="codecov" src={"https://codecov.io/gh/vivitek/god-view/branch/master/graph/badge.svg"}/>
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>
-              <div className="cercleGr"></div>
-              <span className="title">Box</span>
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <img alt="travis" src={"https://api.travis-ci.com/vivitek/box.svg?branch=master"}/>
-              <img alt="codecov" src={"https://codecov.io/gh/vivitek/box/branch/master/graph/badge.svg"}/>
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+        {rows.map((row) => (
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>
+                {row.Service ? (
+                  <div className="greenCircle"></div>
+                ) : (
+                  <div className="redCircle"></div>
+                )} 
+                <span>{row.Title}</span>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <img alt="travis" src={row.Travis}/>
+                <img alt="codecov" src={row.CodeCov} />
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </div>
     </div>
   );

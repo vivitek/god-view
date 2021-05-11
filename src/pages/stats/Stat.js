@@ -14,9 +14,6 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
-  header: {
-    fontWeight: 600,
-  },
   root: {
     width: '98%',
     margin: '1%',
@@ -40,32 +37,20 @@ const rows = [
 
 function Stat() {
   const classes = useStyles();
-  /*const [service, setService] = useState([]);
-
-  useEffect(() => {
-    fetch("http://dashboard.docker.localhost/api/http/routers")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          setService(result.service);
-        }
-      )
-  }, [])*/
 
   return (
     <div className="homePage">
       <div className={classes.root}>
         <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
+          <Table className={classes.table}>
             <TableHead>
-              <TableRow className={classes.header}>
-                <TableCell align="left" size="medium">Status</TableCell>
-                <TableCell align="left" size="medium">Rule</TableCell>
-                <TableCell align="left" size="medium">Entrypoints</TableCell>
-                <TableCell align="left" size="medium">Name</TableCell>
-                <TableCell align="left" size="medium">Service</TableCell>
-                <TableCell align="left" size="medium">Provider</TableCell>
+              <TableRow>
+                <TableCell align="left">Status</TableCell>
+                <TableCell align="left">Rule</TableCell>
+                <TableCell align="left">Entrypoints</TableCell>
+                <TableCell align="left">Name</TableCell>
+                <TableCell align="left">Service</TableCell>
+                <TableCell align="left">Provider</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
