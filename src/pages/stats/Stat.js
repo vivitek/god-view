@@ -40,7 +40,7 @@ const rows = [
 
 function Stat() {
   const classes = useStyles();
-  const [service, setService] = useState([]);
+  /*const [service, setService] = useState([]);
 
   useEffect(() => {
     fetch("http://dashboard.docker.localhost/api/http/routers")
@@ -51,7 +51,7 @@ function Stat() {
           setService(result.service);
         }
       )
-  }, [])
+  }, [])*/
 
   return (
     <div className="homePage">

@@ -67,8 +67,8 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <img src={"https://api.travis-ci.com/vivitek/backend.svg?branch=master"}/>
-              <img src={"https://codecov.io/gh/vivitek/backend/branch/master/graph/badge.svg"} />
+              <img alt="travis" src={"https://api.travis-ci.com/vivitek/backend.svg?branch=master"}/>
+              <img alt="codecov" src={"https://codecov.io/gh/vivitek/backend/branch/master/graph/badge.svg"} />
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -89,8 +89,8 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <img src={"https://api.travis-ci.com/vivitek/dashboard.svg?branch=master"}/>
-              <img src={"https://codecov.io/gh/vivitek/dashboard/branch/master/graph/badge.svg"}/>
+              <img alt="travis" src={"https://api.travis-ci.com/vivitek/dashboard.svg?branch=master"}/>
+              <img alt="codecov" src={"https://codecov.io/gh/vivitek/dashboard/branch/master/graph/badge.svg"}/>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -111,8 +111,8 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <img src={"https://api.travis-ci.com/vivitek/god-view.svg?branch=master"}/>
-              <img src={"https://codecov.io/gh/vivitek/god-view/branch/master/graph/badge.svg"}/>
+              <img alt="travis" src={"https://api.travis-ci.com/vivitek/god-view.svg?branch=master"}/>
+              <img alt="codecov" src={"https://codecov.io/gh/vivitek/god-view/branch/master/graph/badge.svg"}/>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -129,8 +129,8 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <img src={"https://api.travis-ci.com/vivitek/box.svg?branch=master"}/>
-              <img src={"https://codecov.io/gh/vivitek/box/branch/master/graph/badge.svg"}/>
+              <img alt="travis" src={"https://api.travis-ci.com/vivitek/box.svg?branch=master"}/>
+              <img alt="codecov" src={"https://codecov.io/gh/vivitek/box/branch/master/graph/badge.svg"}/>
             </Typography>
           </AccordionDetails>
         </Accordion>
