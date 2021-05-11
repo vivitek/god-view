@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import './Stat.css'
 import '../Page.css'
 import React, { useState, useEffect } from 'react';
