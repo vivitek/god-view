@@ -1,11 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import './Home.css'
+import {Accordion, AccordionSummary, AccordionDetails, Typography, ExpandMoreIcon}  from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,10 +12,26 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
+  greenCircle: {
+    width: "20px",
+    height: "20px",
+    borderRadius: "20px",
+    background: "green",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+  },
+  redCircle: {
+    width: "20px",
+    height: "20px",
+    borderRadius: "20px",
+    background: "red",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+  }
 }));
 
-function createData(Service, Title, CodeCov, Travis) {
-  return {Service, Title, CodeCov, Travis};
+function createData(service, title, codeCov, travis) {
+  return {service, title, codeCov, travis};
 }
 
 const rows = [
@@ -44,18 +55,18 @@ function Home() {
               id="panel1a-header"
             >
               <Typography className={classes.heading}>
-                {row.Service ? (
-                  <div className="greenCircle"></div>
+                {row.service ? (
+                  <div className={classes.greenCircle}></div>
                 ) : (
-                  <div className="redCircle"></div>
+                  <div className={classes.redCircle}></div>
                 )} 
-                <span>{row.Title}</span>
+                <span>{row.title}</span>
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                <img alt="travis" src={row.Travis}/>
-                <img alt="codecov" src={row.CodeCov} />
+                <img alt="travis project compil" src={row.travis}/>
+                <img alt="codecov code test" src={row.codeCov} />
               </Typography>
             </AccordionDetails>
           </Accordion>
