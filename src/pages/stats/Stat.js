@@ -13,19 +13,15 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(Status, Rule, Entrypoints, Name, Service, Provider) {
-  return {Status, Rule, Entrypoints, Name, Service, Provider};
-}
-
 const rows = [
-  createData('ok', 'PathPrefix(/api)', 'traefik', 'api@internal', 'api@internal', 'Internal'),
-  createData('ok', 'PathPrefix(`/`)', 'traefik', 'dashboard@internal', 'dashboard@internal', 'Internal'),
-  createData('ok', 'Host(`grafana.server.vincipit.com`)', 'secureweb', 'grafana@docker', 'grafana', 'Docker'),
-  createData('ok', 'Host(`influxdb.server.vincipit.com`)', 'secureweb', 'influx-r@docker', 'influx-svr', 'Docker'),
-  createData('ok', 'Host(`mongo-backend`)', 'secureweb web', 'mongo-backend@docker', 'mongo-backend', 'Docker'),
-  createData('ok', 'hostregexp(`{host:.+}`)', 'web', 'redirs@docker', 'traefik-backend', 'Docker'),
-  createData('ok', 'Host(`api.server.vincipit.com`)', 'secureweb', 'server-api@docker', 'server-api-svc', 'Docker'),
-  createData('ok', 'Host(`dashboard.server.vincipit.com`)', 'secureweb', 'traefik@docker', 'api@internal', 'Docker'),
+  {status: "ok", rule: "PathPrefix(/api)", entrypoints: "traefik", name: "api@internal", service: "api@internal", provider: "Internal"},
+  {status: "ok", rule: "PathPrefix(`/`)", entrypoints: "traefik", name: "dashboard@internal", service: "dashboard@internal", provider: "Internal"},
+  {status: "ok", rule: "Host(`grafana.server.vincipit.com`)", entrypoints: "secureweb", name: "grafana@docker", service: "grafana", provider: "Docker"},
+  {status: "ok", rule: "Host(`influxdb.server.vincipit.com`)", entrypoints: "secureweb", name: "influx-r@docker", service: "influx-svr", provider: "Docker"},
+  {status: "ok", rule: "Host(`mongo-backend`)", entrypoints: "secureweb web", name: "mongo-backend@docker", service: "mongo-backend", provider: "Docker"},
+  {status: "ok", rule: "hostregexp(`{host:.+}`)", entrypoints: "web", name: "redirs@docker", service: "traefik-backend", provider: "Docker"},
+  {status: "ok", rule: "Host(`api.server.vincipit.com`)", entrypoints: "secureweb", name: "server-api@docker", service: "server-api-svc", provider: "Docker"},
+  {status: "ok", rule: "Host(`dashboard.server.vincipit.com`)", entrypoints: "secureweb", name: "traefik@docker", service: "api@internal", provider: "Docker"}
 ];
 
 function Stat() {
@@ -47,14 +43,14 @@ function Stat() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {rows.map((row, index) => (
                 <TableRow key={row.name}>
-                  <TableCell align="left">{row.Status}</TableCell>
-                  <TableCell align="left">{row.Rule}</TableCell>
-                  <TableCell align="left">{row.Entrypoints}</TableCell>
-                  <TableCell align="left">{row.Name}</TableCell>
-                  <TableCell align="left">{row.Service}</TableCell>
-                  <TableCell align="left">{row.Provider}</TableCell>
+                  <TableCell align="left" >{row.status}</TableCell>
+                  <TableCell align="left" key={index}>{row.rule}</TableCell>
+                  <TableCell align="left" key={index}>{row.entrypoints}</TableCell>
+                  <TableCell align="left" key={index}>{row.name}</TableCell>
+                  <TableCell align="left" key={index}>{row.service}</TableCell>
+                  <TableCell align="left" key={index}>{row.provider}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

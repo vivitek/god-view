@@ -31,15 +31,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function createData(service, title, codeCov, travis) {
-  return {service, title, codeCov, travis};
-}
-
 const rows = [
-  createData(1, 'Serveur', 'https://codecov.io/gh/vivitek/backend/branch/master/graph/badge.svg', 'https://api.travis-ci.com/vivitek/backend.svg?branch=master'),
-  createData(1, 'Interface Utilisateur', 'https://codecov.io/gh/vivitek/dashboard/branch/master/graph/badge.svg', 'https://api.travis-ci.com/vivitek/dashboard.svg?branch=master'),
-  createData(1, 'Xana', 'https://codecov.io/gh/vivitek/god-view/branch/master/graph/badge.svg', 'https://api.travis-ci.com/vivitek/god-view.svg?branch=master'),
-  createData(null, 'Box', 'https://codecov.io/gh/vivitek/box/branch/master/graph/badge.svg', 'https://api.travis-ci.com/vivitek/box.svg?branch=master'),
+  {service: "1", title: "Serveur", codeCov: "https://codecov.io/gh/vivitek/backend/branch/master/graph/badge.svg", travis: "https://api.travis-ci.com/vivitek/backend.svg?branch=master"},
+  {service: "1", title: "Interface Utilisateur", codeCov: "https://codecov.io/gh/vivitek/dashboard/branch/master/graph/badge.svg", travis: "https://codecov.io/gh/vivitek/dashboard/branch/master/graph/badge.svg"},
+  {service: "1", title: "Xana", codeCov: "https://codecov.io/gh/vivitek/god-view/branch/master/graph/badge.svg", travis: "https://api.travis-ci.com/vivitek/god-view.svg?branch=master"},
+  {service: "null", title: "Box", codeCov: "https://codecov.io/gh/vivitek/box/branch/master/graph/badge.svg", travis: "https://api.travis-ci.com/vivitek/box.svg?branch=master"},
 ];
 
 function Home() {
@@ -48,26 +44,26 @@ function Home() {
   return (
     <div className="homePage">
       <div className={classes.root}>
-        {rows.map((row) => (
+        {rows.map((row, index) => (
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography className={classes.heading}>
+              <Typography className={classes.heading} key={index}>
                 {row.service ? (
                   <div className={classes.greenCircle}></div>
                 ) : (
                   <div className={classes.redCircle}></div>
                 )} 
-                <span>{row.title}</span>
+                <span key={index}>{row.title}</span>
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                <img alt="travis project compil" src={row.travis}/>
-                <img alt="codecov code test" src={row.codeCov} />
+                <img key={index} alt={"travis " + row.title + " project compil"} src={row.travis}/>
+                <img key={index} alt={"codecov " + row.title + " code test"} src={row.codeCov} />
               </Typography>
             </AccordionDetails>
           </Accordion>
