@@ -62,10 +62,9 @@ const Login = () => {
             <Field
               className={classes.formField}
               style={{color: "white"}}
-              type="email"
               id="email"
               name="email"
-              label="Email"
+              label="Email or Username"
               as={TextField}
             />
             <Field
