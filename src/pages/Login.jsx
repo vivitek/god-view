@@ -1,7 +1,13 @@
+import { useMutation } from "@apollo/client"
 import { useFormik } from "formik"
+import { useHistory } from "react-router-dom"
+import { toast } from "react-toastify"
 import { LoginSchema } from "../constant"
+import { LOGIN } from "../utils/graphql"
 
 const Login = () => {
+  const history = useHistory()
+  const [login] = useMutation(LOGIN)
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -9,15 +15,29 @@ const Login = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: async (values) => {
-      console.log(values)
+      try {
+        const res = await login({
+          variables: {
+            loginData: values
+          }
+        })
+        if (!res.data.login.access_token)
+          throw "Unauthorized"
+        localStorage.setItem("VIVI_godview_token", res.data.login.access_token)
+        localStorage.setItem("VIVI_godview_user", res.data.login.user)
+        history.push('/')
+        toast.info(`Welcome back ${res.data.login.user.username} !`)
+      } catch (err) {
+        toast.error('Something went wrong :(')
+      }
     }
   })
 
   return (
     <div className="h-full w-full bg-cover bg-center" style={{backgroundImage: "url(https://source.unsplash.com/random/1920x1080)"}}>
       <div style={{ background: "rgba(0,0,0,0.85)" }} className="w-full h-full flex justify-around items-center">
-        <div className="md:w-1/4 hidden md:block">
-          <img src="/vivi_white.svg" alt="ViVi logo"/>
+        <div className="md:w-1/5 hidden md:block">
+          <img src="/vivi_white.svg" alt="VIVI logo"/>
           <p align="right" className="text-white">Login</p>
         </div>
         <div className="bg-darkBlue md:h-1/2 md:w-1/5 w-full h-full md:rounded-xl flex-col">
