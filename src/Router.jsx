@@ -1,4 +1,5 @@
 import { Redirect, Route, Switch } from "react-router-dom"
+import Home from "./pages/Home"
 import Login from "./pages/Login"
 
 
@@ -13,7 +14,7 @@ const Router = () => {
   return (
     <Switch>
       <Route path="/login" exact component={Login}/>
-      <PrivateRoute path="/" exact component={null}/>
+      <PrivateRoute path="/" exact component={Home}/>
       {/* <PrivateRoute path="/box" exact/> */}
       {/* <PrivateRoute path="/box/:uuid" exact/> */}
       {/* <PrivateRoute path="/statistic" exact/> */}

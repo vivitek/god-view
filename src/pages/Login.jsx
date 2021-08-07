@@ -21,8 +21,10 @@ const Login = () => {
             loginData: values
           }
         })
-        if (!res.data.login.access_token)
-          throw "Unauthorized"
+        if (!res.data.login.access_token) {
+        toast.error('Something went wrong :(')
+          return
+        }
         localStorage.setItem("VIVI_godview_token", res.data.login.access_token)
         localStorage.setItem("VIVI_godview_user", res.data.login.user)
         history.push('/')
