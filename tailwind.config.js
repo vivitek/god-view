@@ -18,6 +18,9 @@ module.exports = {
         }
       }
     },
+    screen: {
+      'xl': '1000px'
+    }
   },
   variants: {
     extend: {},
