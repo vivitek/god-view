@@ -10,7 +10,7 @@ const Header = () => {
         alt="VIVI logo no text"
         onClick={() => history.push('/')}
       />
-      <div className="flex justify-evenly w-3/4">
+      <div className="flex justify-evenly w-3/4 itc">
         <Link to="/box">Boxes</Link>
         <Link to="/statistics">Statistics</Link>
         <Link to="/database">Database</Link>
