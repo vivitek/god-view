@@ -11,7 +11,7 @@ const App = () => {
     <div className="h-full w=full">
       <BrowserRouter>
         <ApolloProvider client={client}>
-          {/* <Header /> */}
+          <Header />
           <Router />
         </ApolloProvider>
       </BrowserRouter>
