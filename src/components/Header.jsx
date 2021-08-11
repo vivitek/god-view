@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom"
 const Header = () => {
   const history = useHistory()
   return (
-    <div className="w-full h-12 bg-darkBlue text-white flex items-center justify-between">
+    <header className="w-full h-16 bg-darkBlue text-white flex items-center justify-between text-xl">
       <img
         className="h-1/2 ml-5 cursor-pointer"
         src="/vivi_white_no_text.png"
@@ -25,7 +25,7 @@ const Header = () => {
           history.push('/login')
         }}
       />
-    </div>
+    </header>
   )
 }
 
