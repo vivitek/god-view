@@ -13,12 +13,12 @@ const PrivateRoute = ({path, exact, component}) => {
 const Router = () => {
   return (
     <Switch>
-      <Route path="/login" exact component={Login}/>
       <PrivateRoute path="/" exact component={Home}/>
       {/* <PrivateRoute path="/box" exact/> */}
       {/* <PrivateRoute path="/box/:uuid" exact/> */}
-      {/* <PrivateRoute path="/statistic" exact/> */}
+      {/* <PrivateRoute path="/statistics" exact/> */}
       {/* <PrivateRoute path="/database" exact/> */}
+      <Route path="/login" exact component={Login}/>
     </Switch>
   )
 }

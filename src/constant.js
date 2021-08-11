@@ -9,8 +9,7 @@ const BASE_WS = BASE_URL.replace(/^http/, "ws");
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
-    .required("Required")
-    .email("Must be a valid email address"),
+    .required("Required"),
   password: Yup.string().required("Required"),
 });
 

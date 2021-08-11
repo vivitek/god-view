@@ -16,19 +16,20 @@ const Login = () => {
     validationSchema: LoginSchema,
     onSubmit: async (values) => {
       try {
+        console.log(values)
         const res = await login({
           variables: {
             loginData: values
           }
         })
-        if (!res.data.login.access_token) {
+        if (!res.data.loginGodView.access_token) {
         toast.error('Something went wrong :(')
           return
         }
-        localStorage.setItem("VIVI_godview_token", res.data.login.access_token)
-        localStorage.setItem("VIVI_godview_user", res.data.login.user)
+        localStorage.setItem("VIVI_godview_token", res.data.loginGodView.access_token)
+        localStorage.setItem("VIVI_godview_user", res.data.loginGodView.user)
         history.push('/')
-        toast.info(`Welcome back ${res.data.login.user.username} !`)
+        toast.info(`Welcome back ${res.data.loginGodView.user.username} !`)
       } catch (err) {
         toast.error('Something went wrong :(')
       }
@@ -48,17 +49,16 @@ const Login = () => {
           <h2 className="text-white mb-5">Enter your email & password</h2>
             <div className="flex flex-wrap h-1/4 md:h-1/2 content-between">
               <div className="flex flex-col w-full">
-                <label className="text-white text-sm font-medium">Email address</label>
+                <label className="text-white text-sm font-medium mb-1">Email address or username</label>
                 <input
                   className="bg-blue text-white pl-1 rounded-md h-9 focus:outline-none"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   name="email"
-                  type="email"
                 />
               </div>
               <div className="flex flex-col w-full">
-                <label className="text-white text-sm font-medium">Password</label>
+                <label className="text-white text-sm font-medium mb-1">Password</label>
                 <input
                   className="bg-blue text-white pl-1 rounded-md h-9 focus:outline-none"
                   onChange={formik.handleChange}
