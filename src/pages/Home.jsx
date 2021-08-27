@@ -5,7 +5,7 @@ const Home = () => {
   const services = [
     {name: "Showcase", url: "https://vincipit.com"},
     {name: "API", url: "https://api.server.vincipit.com"},
-    {name: "OpenVVRT", url: "https://openvivi.com"},
+    {name: "OpenVVRT", url: "https://api.openvivi.com"},
     {name: "Dashboard", url: "https://dashboard.vincipit.com"},
     {name: "God view", url: "https://god.vincipit.com"},
     {name: "X.A.N.A", url: "https://xana.vincipit.com"},
