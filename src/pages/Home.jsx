@@ -11,7 +11,7 @@ const Home = () => {
     {name: "X.A.N.A", url: "https://xana.vincipit.com"},
   ]
   const Card = ({service}) => {
-    const [ping, setPing] = useState([])
+    const [ping] = useState([])
     //TODO should show response time in graph
     return (
       <div className="bg-darkBlue w-11/12 xl:w-2/5 h-1/6 xl:h-auto m-2 xl:m-8 flex flex-col shadow-xl">
