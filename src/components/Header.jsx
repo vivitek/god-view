@@ -1,32 +1,27 @@
-import { useHistory, Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom";
+import ViviHourglass from "../images/ViviHourglass";
+import { noHeaderRoutes } from "../constant";
 
 const Header = () => {
-  const history = useHistory()
-  return (
-    <header className="w-full h-16 bg-darkBlue text-white flex items-center justify-between text-xl">
-      <img
-        className="h-1/2 ml-5 cursor-pointer"
-        src="/vivi_white_no_text.png"
-        alt="VIVI logo no text"
-        onClick={() => history.push('/')}
-      />
-      <div className="flex justify-evenly w-3/4 itc">
-        <Link to="/box">Boxes</Link>
-        <Link to="/statistics">Statistics</Link>
-        <Link to="/database">Database</Link>
-      </div>
-      <img
-        className="h-1/2 mr-5 cursor-pointer"
-        src="/vivi_white_no_text.png"
-        alt="VIVI logo no text"
-        onClick={() => {
-          localStorage.removeItem('VIVI_godview_token')
-          localStorage.removeItem('VIVI_godview_user')
-          history.push('/login')
-        }}
-      />
-    </header>
-  )
-}
+  const location = useLocation();
 
-export default Header
+  if (location.pathname.includes(noHeaderRoutes))
+    return (<div></div>)
+
+    return (
+    <header className="z-0">
+      <div
+        className="w-full bg-darkBlue h-12 md:h-20 text-white flex items-center"
+      >
+        <Link to="/">
+          <ViviHourglass className="m-3 h-6 w-auto" />
+        </Link>
+        <Link className="ml-4" to="/box">Boxes</Link>
+        <Link className="ml-4" to="/statistics">Statistics</Link>
+        <Link className="ml-4" to="/database">Database</Link>
+      </div>
+    </header>
+  );
+};
+
+export default Header;

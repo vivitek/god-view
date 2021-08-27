@@ -1,21 +1,30 @@
+const defaults = require("tailwindcss/defaultTheme");
+
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
-        'sans': "montserrat"
+        sans: ["montserrat", ...defaults.fontFamily.sans],
+        itc: ["itc-avant-garde-gothic-pro", "sans-serif"],
       },
       colors: {
         blue: {
           DEFAULT: "#313E68"
         },
         darkBlue: {
-          DEFAULT: "#292e41"
+          DEFAULT: "#1A1F32"
         },
         viviBlue: {
           DEFAULT: "#3c65ac"
+        },
+        grayBlue: {
+          DEFAULT: "#292E41"
         }
+      },
+      height: {
+        "9/20": "45%"
       }
     },
     screen: {
@@ -25,5 +34,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-scrollbar")
+  ],
 }

@@ -1,8 +1,6 @@
 import { Redirect, Route, Switch } from "react-router-dom"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
-import Header from "./components/Header"
-
 
 const PrivateRoute = ({path, exact, component}) => {
   return localStorage.getItem('VIVI_godview_token')
@@ -11,26 +9,17 @@ const PrivateRoute = ({path, exact, component}) => {
 
 }
 
-const PrivateRoutes = () => {
+const Routes = () => {
   return (
-    <>
-      <Header />
+    <Switch>
+      <Route path="/login" exact component={Login}/>
       <PrivateRoute path="/" exact component={Home}/>
       {/* <PrivateRoute path="/box" exact/> */}
       {/* <PrivateRoute path="/box/:uuid" exact/> */}
       {/* <PrivateRoute path="/statistics" exact/> */}
       {/* <PrivateRoute path="/database" exact/> */}
-    </>
-  )
-}
-
-const Router = () => {
-  return (
-    <Switch>
-      <Route path="/login" exact component={Login}/>
-      <PrivateRoutes />
     </Switch>
   )
 }
 
-export default Router
+export default Routes
