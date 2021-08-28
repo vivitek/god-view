@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Line } from "react-chartjs-2"
 
 const Home = () => {
@@ -11,10 +11,22 @@ const Home = () => {
     {name: "X.A.N.A", url: "https://xana.vincipit.com"},
   ]
   const Card = ({service}) => {
-    const [ping] = useState([])
+		const [isOnline, setIsOnline] = useState(false)
+
+		useEffect(() => {
+			fetch(service.url).then(res => {
+				if (res)
+					setIsOnline(true)
+			})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		}, [])
+
     return (
       <div className="bg-darkBlue w-11/12 xl:w-2/5 h-1/6 xl:h-auto m-2 xl:m-8 flex flex-col shadow-xl">
-        <a className="font-itc text-center mb-3 mt-3" href={service.url}>{service.name}</a>
+        <div className="font-itc text-center mb-3 mt-3" href={service.url}>
+          <div className={`bg-${isOnline ? "viviGreen" : "viviRed"} h-4 w-4 rounded-full mr-3 float-right`}></div>
+					<a href={service.url}>{service.name}</a>
+					</div>
         <Line data={canvas => {
 							const ctx = canvas.getContext("2d");
 							const chartColor = '#FFFFFF';
@@ -39,7 +51,7 @@ const Home = () => {
 									fill: true,
 									backgroundColor: gradientFill,
 									borderWidth: 2,
-									data: ping
+									data: []
 								}]
 							}
 						}
