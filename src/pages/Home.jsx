@@ -10,10 +10,10 @@ const Home = () => {
     {name: "God view", url: "https://god.vincipit.com"},
     {name: "X.A.N.A", url: "https://xana.vincipit.com"},
   ]
-  const Card = ({service, idx}) => {
+  const Card = ({service}) => {
     const [ping] = useState([])
     return (
-      <div key={idx} className="bg-darkBlue w-11/12 xl:w-2/5 h-1/6 xl:h-auto m-2 xl:m-8 flex flex-col shadow-xl">
+      <div className="bg-darkBlue w-11/12 xl:w-2/5 h-1/6 xl:h-auto m-2 xl:m-8 flex flex-col shadow-xl">
         <a className="font-itc text-center mb-3 mt-3" href={service.url}>{service.name}</a>
         <Line data={canvas => {
 							const ctx = canvas.getContext("2d");
@@ -51,7 +51,7 @@ const Home = () => {
   return (
     <div className="bg-grayBlue text-white h-auto flex flex-row flex-wrap justify-around">
       {services.map((service, idx) => {
-        return <Card service={service} idx={idx}/>
+        return <Card service={service} key={idx}/>
       })}
     </div>
   )

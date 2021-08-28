@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Redirect } from "react-router-dom"
+import { toast } from "react-toastify"
 import Loading from "../images/Loading"
 import { GET_BOX_BY_UUID } from "../utils/graphql"
 
@@ -8,7 +9,7 @@ const Box = () => {
   const { id } = useParams()
   const [box, setBox] = useState()
   const [loading, setLoading] = useState(true)
-  const {err, data} = useQuery(GET_BOX_BY_UUID, {variables: {id}})
+  const {error, data} = useQuery(GET_BOX_BY_UUID, {variables: {id}})
 
   useEffect(() => {
     if (data) {
@@ -17,8 +18,10 @@ const Box = () => {
     }
   }, [data])
 
-  if (err)
-    return console.log(err)
+  if (error) {
+    toast.error("Box does not exists.")
+    return <Redirect to="/" />
+  }
   if (loading)
     return <Loading color="white"/>
   return (
