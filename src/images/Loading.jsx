@@ -1,7 +1,7 @@
 const Loading = ({color = "white", size = 24}) => {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center">
-      <svg className={`animate-spin w-${size} h-${size}`} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 330 330" fill={color}>
+      <svg className={`animate-spin`} width={size} height={size} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 330 330" fill={color}>
         <g id="XMLID_2_">
 	        <path id="XMLID_4_" d="M97.5,165c0-8.284-6.716-15-15-15h-60c-8.284,0-15,6.716-15,15s6.716,15,15,15h60 C90.784,180,97.5,173.284,97.5,165z"/>
 	        <path id="XMLID_5_" d="M307.5,150h-30c-8.284,0-15,6.716-15,15s6.716,15,15,15h30c8.284,0,15-6.716,15-15S315.784,150,307.5,150z" />

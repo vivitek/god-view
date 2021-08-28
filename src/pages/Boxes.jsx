@@ -11,7 +11,7 @@ const Card = ({ box }) => {
   const [online, setOnline] = useState(false)
 
   useEffect(() => {
-    fetch(`https://${box._id}.api.openvivi.com`, {}).then(res => {
+    fetch(`https://${box._id}.openvivi.com`, {}).then(res => {
       if (res.status === 200)
         setOnline(true)
     })
