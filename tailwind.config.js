@@ -22,6 +22,9 @@ module.exports = {
         viviRed: {
           DEFAULT: "#68313f",
         },
+        viviGreen: {
+          DEFAULT: "#3f6831",
+        },
         grayBlue: {
           DEFAULT: "#292E41"
         }

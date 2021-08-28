@@ -25,7 +25,8 @@ const GET_BOXES = gql`
 const GET_BOX_BY_UUID = gql`
   query($id: String!) {
     getRouter(id: $id) {
-      name url
+      name
+      url
     }
   }
 `
