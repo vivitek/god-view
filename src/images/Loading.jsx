@@ -1,4 +1,4 @@
-const Loading = ({color = "white", size = 24}) => {
+const Loading = ({color = "white", size = 96}) => {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center">
       <svg className={`animate-spin`} width={size} height={size} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 330 330" fill={color}>
