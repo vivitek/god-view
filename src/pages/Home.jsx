@@ -10,12 +10,11 @@ const Home = () => {
     {name: "God view", url: "https://god.vincipit.com"},
     {name: "X.A.N.A", url: "https://xana.vincipit.com"},
   ]
-  const Card = ({service}) => {
+  const Card = ({service, idx}) => {
     const [ping] = useState([])
-    //TODO should show response time in graph
     return (
-      <div className="bg-darkBlue w-11/12 xl:w-2/5 h-1/6 xl:h-auto m-2 xl:m-8 flex flex-col shadow-xl">
-        <a className="itc text-center mb-3 mt-3" href={service.url}>{service.name}</a>
+      <div key={idx} className="bg-darkBlue w-11/12 xl:w-2/5 h-1/6 xl:h-auto m-2 xl:m-8 flex flex-col shadow-xl">
+        <a className="font-itc text-center mb-3 mt-3" href={service.url}>{service.name}</a>
         <Line data={canvas => {
 							const ctx = canvas.getContext("2d");
 							const chartColor = '#FFFFFF';

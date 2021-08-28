@@ -44,7 +44,7 @@ const Login = () => {
         </div>
         <div className="bg-darkBlue xl:h-1/2 xl:w-1/5 w-full h-full xl:rounded-xl flex-col">
           <form onSubmit={formik.handleSubmit} className="flex-col p-10 h-full">
-          <h1 className="text-white text-3xl itc">Sign in</h1>
+          <h1 className="text-white text-3xl font-itc">Sign in</h1>
           <h2 className="text-white mb-5">Enter your email & password</h2>
             <div className="flex flex-wrap h-1/4 xl:h-1/2 content-between">
               <div className="flex flex-col w-full">

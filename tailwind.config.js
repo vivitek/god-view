@@ -19,11 +19,17 @@ module.exports = {
         viviBlue: {
           DEFAULT: "#3c65ac"
         },
+        viviRed: {
+          DEFAULT: "#68313f",
+        },
         grayBlue: {
           DEFAULT: "#292E41"
         }
       },
       height: {
+        "9/20": "45%"
+      },
+      width: {
         "9/20": "45%"
       }
     },

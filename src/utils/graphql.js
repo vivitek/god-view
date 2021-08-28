@@ -12,4 +12,26 @@ const LOGIN = gql`
   }
 `
 
-export { LOGIN }
+const GET_BOXES = gql`
+  query {
+    getRouters {
+      _id
+      name
+      url
+    }
+  }
+`
+
+const GET_BOX_BY_UUID = gql`
+  query($id: String!) {
+    getRouter(id: $id) {
+      name url
+    }
+  }
+`
+
+export {
+  LOGIN,
+  GET_BOXES,
+  GET_BOX_BY_UUID
+}
