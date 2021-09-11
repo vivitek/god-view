@@ -43,7 +43,7 @@ const Database = () => {
         <Tab name="Boxes"/>
         <Tab name="Empty"/>
       </div>
-      <div className="overflow-x-scroll">
+      <div className="overflow-x-auto">
         {!data[selectedTab].length
           ? <div className="h-10">
               Nothing to show here
