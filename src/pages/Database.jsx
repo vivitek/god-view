@@ -51,10 +51,9 @@ const Database = () => {
           : <table className="w-full">
             <thead className="bg-viviBlue-500">{
               <tr>
-                {Object.keys(data[selectedTab][0]).map((key, idx) => {
-                  if (!key.startsWith('__'))
-                    return <th key={idx} className="h-12 text-left pl-4">{key}</th>
-                })}
+                {Object.keys(data[selectedTab][0]).map((key, idx) =>
+                    !key.startsWith('__') && <th key={idx} className="h-12 text-left pl-4">{key}</th>
+                )}
               </tr>
             }</thead>
             <tbody>
