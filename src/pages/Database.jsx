@@ -37,13 +37,13 @@ const Database = () => {
   }, [usersData, boxesData])
 
   return (
-    <div className="bg-grayBlue text-white flex flex-col h-full px-8">
+    <div className="bg-grayBlue text-white flex flex-col h-full md:px-8">
       <div className="flex flex-row">
         <Tab name="Users"/>
         <Tab name="Boxes"/>
         <Tab name="Empty"/>
       </div>
-      <div>
+      <div className="overflow-x-scroll">
         {!data[selectedTab].length
           ? <div className="h-10">
               Nothing to show here
