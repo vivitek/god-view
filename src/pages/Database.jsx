@@ -16,7 +16,7 @@ const Database = () => {
   const Tab = ({name}) => {
     return (
       <button
-        className={"bg-darkBlue px-8 py-2 rounded-bl-xl rounded-br-xl mr-2 mb-4 ".concat(name.toLocaleLowerCase() === selectedTab ? "bg-viviBlue-500" : "")}
+        className={"px-8 py-2 rounded-bl-xl rounded-br-xl mr-2 mb-4 ".concat(name.toLocaleLowerCase() === selectedTab ? "bg-viviBlue-500 font-bold" : "bg-darkBlue")}
         onClick={() => setSelectedTab(name.toLocaleLowerCase())}
       > {name} </button>
     )
@@ -61,10 +61,9 @@ const Database = () => {
               {data[selectedTab].map((row, idx) => {
                 return (
                   <tr key={idx} className={"h-10 ".concat(idx % 2 ? "bg-viviBlue-500" : "")}>
-                    {Object.keys(row).map((key, idx) => {
-                      if (!key.startsWith('__'))
-                        return <td className="w-1/4 pl-4" key={idx}>{row[key]}</td>
-                    })}
+                    {Object.keys(row).map((key, idx) =>
+                      !key.startsWith('__') && <td className="w-1/4 pl-4" key={idx}>{row[key]}</td>
+                    )}
                   </tr>
                 )
               })}
