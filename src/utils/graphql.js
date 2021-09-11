@@ -31,8 +31,19 @@ const GET_BOX_BY_UUID = gql`
   }
 `
 
+const GET_USERS = gql`
+  query {
+    getUsers {
+      _id
+      username
+      email
+    }
+  }
+`
+
 export {
   LOGIN,
   GET_BOXES,
-  GET_BOX_BY_UUID
+  GET_BOX_BY_UUID,
+  GET_USERS
 }

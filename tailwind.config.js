@@ -17,7 +17,8 @@ module.exports = {
           DEFAULT: "#1A1F32"
         },
         viviBlue: {
-          DEFAULT: "#3c65ac"
+          DEFAULT: "#3c65ac",
+          500: "#3c65ac80"
         },
         viviRed: {
           DEFAULT: "#68313f",
