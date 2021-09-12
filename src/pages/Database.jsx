@@ -22,7 +22,6 @@ const Database = () => {
         deleteBox({variables: {id}})
         setData(old => {
           old["boxes"].data = old["boxes"].data.filter(box => box._id !== id)
-          console.log(old)
           return old
         })
       }
