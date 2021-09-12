@@ -25,11 +25,7 @@ const Database = () => {
           return old
         })
       }
-  },
-    empty: {
-      data: [],
-      deleteCb: () => {}
-  }
+    }
   })
 
   const { data: boxesData } = useQuery(GET_BOXES)
@@ -42,7 +38,7 @@ const Database = () => {
   const Tab = ({name}) => {
     return (
       <button
-        className={"px-8 py-2 rounded-bl-xl rounded-br-xl mr-2 mb-4 ".concat(name.toLocaleLowerCase() === selectedTab ? "bg-viviBlue-500 font-bold" : "bg-darkBlue")}
+        className={"px-8 py-2 rounded-bl-xl rounded-br-xl mr-2 mb-4 focus:outline-none ".concat(name.toLocaleLowerCase() === selectedTab ? "bg-viviBlue-500 font-bold" : "bg-darkBlue")}
         onClick={() => setSelectedTab(name.toLocaleLowerCase())}
       > {name} </button>
     )
