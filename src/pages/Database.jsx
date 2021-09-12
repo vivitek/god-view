@@ -63,7 +63,6 @@ const Database = () => {
       <div className="flex flex-row">
         <Tab name="Users"/>
         <Tab name="Boxes"/>
-        <Tab name="Empty"/>
       </div>
       <div className="overflow-x-auto">
         {!data[selectedTab].data.length
