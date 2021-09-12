@@ -30,6 +30,13 @@ const GET_BOX_BY_UUID = gql`
     }
   }
 `
+const DELETE_BOX = gql`
+    mutation($id: String!) {
+        deleteRouter(id: $id) {
+            _id
+        }
+    }
+`
 
 const GET_USERS = gql`
   query {
@@ -41,9 +48,19 @@ const GET_USERS = gql`
   }
 `
 
+const DELETE_USER = gql`
+    mutation($id: String!) {
+        deleteUser(id: $id) {
+            _id
+        }
+    }
+`
+
 export {
   LOGIN,
   GET_BOXES,
   GET_BOX_BY_UUID,
-  GET_USERS
+  DELETE_BOX,
+  GET_USERS,
+  DELETE_USER
 }
