@@ -11,6 +11,10 @@ const Card = ({ box }) => {
   const [online, setOnline] = useState(false)
 
   useEffect(() => {
+    if (process.env["NODE_ENV"] && process.env["NODE_ENV"] !== "production") {
+      setOnline(Boolean(Math.trunc(Math.random() * 2)))
+      return
+    }
     fetch(`https://${box._id}.openvivi.com`, {}).then(res => {
       if (res.status === 200)
         setOnline(true)
