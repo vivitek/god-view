@@ -19,7 +19,7 @@ const Card = ({ box }) => {
   }, [])
 
   return (
-    <div href={`/box/${box._id}`} className="bg-darkBlue w-72 h-auto max-h-48 m-4 rounded-xl p-4">
+    <div href={`/box/${box._id}`} className="bg-darkBlue w-72 h-auto max-h-48 m-4 rounded-xl p-4 shadow-xl">
       <div className="font-itc text-center h-1/6">{box.name}</div>
       <div className="h-5/6 flex flex-col">
         <span>Id: {box._id}</span>
@@ -29,7 +29,7 @@ const Card = ({ box }) => {
         </div>
         <div className="w-full text-right">
           <button
-            className="font-bold bg-viviBlue py-1.5 xl:px-8 rounded-full w-28 sm:w-40 h-8 text-md mt-4"
+            className="font-bold bg-viviBlue py-1.5 xl:px-8 rounded-full w-28 sm:w-40 h-8 text-md mt-4 shadow-lg"
             onClick={() => history.push(`/box/${box._id}`)}
           >Details</button>
         </div>
