@@ -67,7 +67,7 @@ const Login = () => {
                 />
               </div>
             </div>
-            <button //TODO switch to custom button when the lib will be published
+            <button
               type="submit"
               className="text-white mt-10 font-bold float-right bg-viviBlue py-1.5 px-8 rounded-full w-40 h-12 xl:w-auto text-base"
             >SUBMIT</button>

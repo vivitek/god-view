@@ -11,6 +11,7 @@ const Box = () => {
   const [box, setBox] = useState()
   const [loading, setLoading] = useState(true)
   const {error, data} = useQuery(GET_BOX_BY_UUID, {variables: {id}})
+  const [selectedTab, setSelectedTab] = useState('graphql')
 
   useEffect(() => {
     if (data) {
@@ -18,6 +19,32 @@ const Box = () => {
       setLoading(false)
     }
   }, [data])
+
+  const Tab = ({name}) => {
+    return (
+      <button
+        className={"px-8 py-2 rounded-br-xl rounded-tr-xl mr-2 mb-4 focus:outline-none ".concat(name.toLocaleLowerCase() === selectedTab ? "bg-viviBlue-500 shadow-md" : "")}
+        onClick={() => setSelectedTab(name.toLocaleLowerCase())}
+      > {name} </button>
+    )
+  }
+
+  const MultiServiceCard = ({children, className}) => {
+    return (
+      <div className={"w-11/12 xl:w-9/20 flex bg-darkBlue m-1 rounded-md shadow-xl ".concat(className)}>
+        <div className="flex w-1/4 flex-col mt-4">
+            <Tab name="Graphql"/>
+            <Tab name="Rabbitmq"/>
+            <Tab name="PCAP"/>
+            <Tab name="DHCP"/>
+            <Tab name="Firewall"/>
+        </div>
+        <div className="w-full m-4 pl-4 border-l border-grayBlue">
+          {children}
+        </div>
+      </div>
+    )
+  }
 
   if (error) {
     toast.error("Box does not exists.")
@@ -47,9 +74,13 @@ const Box = () => {
           <span>Telephone: {box?.owner?.phone || "Undefined"}</span>
         </div>
       </div>
-      <div className="h-2/3 xl:h-3/5 w-11/12 xl:w-9/20 bg-darkBlue m-1 rounded-md shadow-xl">log service</div>
+      <MultiServiceCard  className="h-2/3 xl:h-3/5">
+        logs services
+      </MultiServiceCard>
       <div className="h-2/3 xl:h-9/20 w-11/12 xl:w-9/20 bg-darkBlue m-1 rounded-md shadow-xl">stats system</div>
-      <div className="h-2/3 xl:h-9/20 w-11/12 xl:w-9/20 bg-darkBlue m-1 rounded-md shadow-xl">service</div>
+      <MultiServiceCard className="h-2/3 xl:h-9/20">
+        services options
+      </MultiServiceCard>
     </div>
   )
 }
