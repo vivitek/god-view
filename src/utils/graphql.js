@@ -37,6 +37,15 @@ const DELETE_BOX = gql`
         }
     }
 `
+const CREATE_BOX = gql`
+    mutation($createRouterData: RouterCreationInput!) {
+        createRouter(createRouterData: $createRouterData) {
+            name
+            url
+            _id
+        }
+    }
+`
 
 const GET_USERS = gql`
   query {
@@ -49,11 +58,21 @@ const GET_USERS = gql`
 `
 
 const DELETE_USER = gql`
-    mutation($id: String!) {
-        deleteUser(id: $id) {
-            _id
-        }
+  mutation($id: String!) {
+    deleteUser(id: $id) {
+      _id
     }
+  }
+`
+
+const CREATE_USER = gql`
+  mutation($userCreationData: UserCreationInput!) {
+    createUser(userCreationData : $userCreationData) {
+      username
+      email
+      _id
+    }
+  }
 `
 
 export {
@@ -61,6 +80,8 @@ export {
   GET_BOXES,
   GET_BOX_BY_UUID,
   DELETE_BOX,
+  CREATE_BOX,
   GET_USERS,
-  DELETE_USER
+  DELETE_USER,
+  CREATE_USER
 }
