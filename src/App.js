@@ -1,22 +1,33 @@
-import Header from './components/Header/Header'
-import Router from './Router'
-import './App.css';
-import { BrowserRouter } from "react-router-dom"
-import { ApolloProvider } from '@apollo/client';
-import { client } from './graphql';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { ApolloProvider } from "@apollo/client";
 import "react-toastify/dist/ReactToastify.css";
+import { client } from "./utils/apollo";
+import Page from "./components/Page";
+import Routes from "./Routes";
+import Header from './components/Header'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Header />
+    <div className="w-screen h-screen flex flex-col overflow-y-auto overflow-x-hidden scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-grayBlue-DEFAULT">
+      <ToastContainer
+        position="bottom-right"
+        closeButton={false}
+        pauseOnHover={false}
+        autoClose={2000}
+        hideProgressBar
+      />
       <BrowserRouter>
-          <ApolloProvider client={client}>
-            <Router />
-          </ApolloProvider>
+        <ApolloProvider client={client}>
+          <Header />
+          <main>
+            <Page>
+              <Routes />
+            </Page>
+          </main>
+        </ApolloProvider>
       </BrowserRouter>
-      <ToastContainer />
     </div>
   );
 }
