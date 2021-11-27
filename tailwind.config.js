@@ -1,6 +1,7 @@
 const defaults = require("tailwindcss/defaultTheme");
 
 module.exports = {
+  mode: "jit",
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: "class", // or 'media' or 'class'
   theme: {
@@ -114,7 +115,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require("tailwindcss-scrollbar")
-  ],
-}
+  plugins: [require("@tailwindcss/forms")],
+};
