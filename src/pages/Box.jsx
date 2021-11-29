@@ -6,7 +6,6 @@ import { toast } from "react-toastify"
 import Loading from "../images/Loading"
 import { GET_BOX_BY_UUID } from "../utils/graphql"
 import { Bar } from "react-chartjs-2"
-import { Switch } from '@headlessui/react'
 
 
 const Box = () => {
@@ -37,6 +36,7 @@ const Box = () => {
       })
       axios.get(`http://${box.url}/services/logs`).then(res => setLogs(res.data))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [box])
 
   const retrieveInfo = async () => {
