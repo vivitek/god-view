@@ -163,7 +163,7 @@ const Header = () => {
             Statistics
           </Link>
           <Link to="/database" className="mt-2 ml-4 text-lg">
-            Databases
+            Database
           </Link>
         </div>
         {!userContext.authed &&

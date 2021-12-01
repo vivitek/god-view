@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/client";
-import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { LOGIN } from "../utils/graphql";
@@ -47,8 +46,8 @@ const Login = () => {
         </div>
         <div className="bg-darkBlue xl:h-1/2 xl:w-1/5 w-full h-full xl:rounded-xl flex-col">
           <form onSubmit={formik.handleSubmit} className="flex-col p-12 h-full pb-0">
-          <h1 className="text-white text-4xl font-itc">Se connecter</h1>
-          <h2 className="text-white mb-5 text-lg">Entrez vos informations</h2>
+          <h1 className="text-white text-3xl font-itc">Se connecter</h1>
+          <h2 className="text-white mb-5 text-md">Entrez vos informations</h2>
             <div className="flex flex-wrap h-1/4 xl:h-1/2">
               <div className="flex flex-col w-full">
                 <label className="text-white text-base font-medium mt-2 mb-1">Email</label>

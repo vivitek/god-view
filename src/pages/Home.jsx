@@ -18,14 +18,13 @@ const Home = () => {
 				// if (res)
 					// setIsOnline(true)
 			// })
-			// eslint-disable-next-line react-hooks/exhaustive-deps
-			setIsOnline(false)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		}, [])
 
-		return (
-			<div className="bg-darkBlue w-11/12 xl:w-2/5 h-1/6 xl:h-auto m-2 xl:m-8 flex flex-col shadow-xl">
-				<div className="font-itc text-center mb-3 mt-3" href={service.url}>
-					<div className={`bg-${isOnline ? "viviGreen" : "viviRed"} h-4 w-4 rounded-full mr-3 float-right`}></div>
+    return (
+      <div className="w-11/12 xl:w-12/25 h-1/6 xl:h-auto mt-4 md:mt-9 xl:mt-6 flex flex-col shadow-xl rounded-xl p-2 bg-darkBlue">
+        <div className="font-itc text-center mb-3 mt-3" href={service.url}>
+          <div className={`bg-${isOnline ? "viviGreen" : "viviRed"} h-4 w-4 rounded-full mr-3 float-right`}></div>
 					<a href={service.url}>{service.name}</a>
 				</div>
 				<Line data={canvas => {
@@ -61,13 +60,13 @@ const Home = () => {
 		)
 	}
 
-	return (
-		<div className="bg-grayBlue text-white h-auto flex flex-row flex-wrap justify-around">
-			{services.map((service, idx) => {
-				return <Card service={service} key={idx} />
-			})}
-		</div>
-	)
+  return (
+    <div className="text-white h-auto flex flex-row flex-wrap justify-evenly bg-grayBlue xl:mb-6 md:mb-9 mb-4">
+      {services.map((service, idx) => {
+        return <Card service={service} key={idx}/>
+      })}
+    </div>
+  )
 }
 
 export default Home
