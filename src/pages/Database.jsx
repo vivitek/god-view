@@ -1,7 +1,6 @@
 import { useQuery, useMutation } from "@apollo/client"
 import { useEffect, useState } from "react"
 import { GET_BOXES, GET_USERS, DELETE_BOX, DELETE_USER, CREATE_BOX, CREATE_USER } from "../utils/graphql"
-import Trash from "../images/Trash"
 import UserForm from "../components/Database/User"
 import BoxForm from "../components/Database/Box"
 import { toast } from "react-toastify"
@@ -9,7 +8,6 @@ import { Table, Close } from "@vivitek/toolbox"
 
 const Database = () => {
   const [selectedTab, setSelectedTab] = useState("users")
-  const [toCreate, setToCreate] = useState("users")
 
   const { data: boxesData, refetch: refetchBoxes } = useQuery(GET_BOXES)
   const { data: usersData, refetch: refetchUsers } = useQuery(GET_USERS)

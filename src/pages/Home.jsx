@@ -16,7 +16,7 @@ const Home = () => {
 		useEffect(() => {
 			// fetch(service.url).then(res => {
 				// if (res)
-					// setIsOnline(true)
+					setIsOnline(true)
 			// })
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		}, [])

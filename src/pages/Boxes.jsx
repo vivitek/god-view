@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 import { GET_BOXES } from "../utils/graphql"
 import Loading from "../images/Loading"
-import ViviHourglass from "../images/ViviHourglass"
 import Search from "../images/search"
 import ReactTooltip from 'react-tooltip';
 
