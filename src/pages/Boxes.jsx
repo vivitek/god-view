@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 import { GET_BOXES } from "../utils/graphql"
 import Loading from "../images/Loading"
-import Search from "../images/search"
+import ReactTooltip from 'react-tooltip';
 
 const Card = ({ box }) => {
   const history = useHistory()
@@ -19,21 +19,32 @@ const Card = ({ box }) => {
       if (res.status === 200)
         setOnline(true)
     })
-  //eslint-disable-next-line react-hooks/exhaustive-deps
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    <div href={`/box/${box._id}`} className="bg-darkBlue w-72 h-auto max-h-48 m-4 rounded-xl p-4 shadow-xl">
-      <div className="font-itc text-center h-1/6">{box.name}</div>
+    <div href={`/box/${box._id}`} className="bg-darkBlue p-6 w-80 mt-2 md:mb-0  mx-4 mb-4 md:mb-8 lg:mx-0 md:min-h-80 md:w-80 md:max-h-96 h-auto rounded-xl transform transition-all duration-150 hover:scale-105 group">
+      <div className="w-full flex justify-between">
+        <p data-tip data-for={box.name} className="w-full text-lg text-center font-itc text-bold color-red capitalize">{box.name.slice(0, 19)}</p>
+        <ReactTooltip id={box.name} effect="solid"><p>{box.name}</p></ReactTooltip>
+      </div>
       <div className="h-5/6 flex flex-col">
-        <span>Id: {box._id}</span>
-        <span>Name: {box.name}</span>
-        <div className="flex items-center">Online:
-          <div className={`bg-${online ? "viviGreen" : "viviRed"} h-4 w-4 rounded-full ml-2`}></div>
+        <div className="mt-5 flex justify-between">
+          <h4 className="capitalize text-lg">ID :</h4>
+          <p data-tip data-for={box._id} className="text-lg">{box._id.slice(0, 19)}</p>
+          <ReactTooltip id={box._id} effect="solid"><p>{box._id}</p></ReactTooltip>
+        </div>
+        <div className="mt-2 flex justify-between">
+          <h4 className="capitalize text-lg">URL :</h4>
+          <p data-tip data-for={box.url} className="text-lg">{box.url.slice(0, 19)}</p>
+          <ReactTooltip id={box.url} effect="solid"><p>{box.url}</p></ReactTooltip>
+        </div>
+        <div className="mt-2 flex justify-between">Online :
+          <div className={`bg-${online ? "green-500" : "red-500"} h-4 w-4 rounded-full ml-2`}></div>
         </div>
         <div className="w-full text-right">
           <button
-            className="font-bold bg-viviBlue py-1.5 xl:px-8 rounded-full w-28 sm:w-40 h-8 text-md mt-4 shadow-lg"
+            className="bg-viviYellOrange text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-200 each-in-out font-sans font-bold text-base mt-2"
             onClick={() => history.push(`/box/${box._id}`)}
           >Details</button>
         </div>
@@ -65,21 +76,23 @@ const Boxes = () => {
     return <Loading color="white" />
   return (
     <div className="bg-grayBlue text-white flex flex-row flex-wrap justify-evenly">
-      <div className="w-full h-16 p-4">
+      <div className="w-full h-auto p-4 m-2">
         <form>
           <div className="flex items-center placecontent-center md:float-right md:mr-6">
-            <Search color="white" size="32"/>
-            <input
-              name="filter"
-              type="text"
-              className="bg-blue text-white pl-1 rounded-md h-9 focus:outline-none ml-4"
-              onChange={(event) => {
-                const filter = event.target.value?.toLocaleLowerCase()
-                setFilteredBoxes(boxes.filter(e => {
-                  return e._id.toLocaleLowerCase().includes(filter) || e.name.toLocaleLowerCase().includes(filter)
-                }))
-              }}
-            />
+            <div className="flex items-center w-full">
+              <label className="text-white text-base font-medium mr-2">Search</label>
+              <input
+                className="bg-gray-200 dark:bg-[#313E68] border-none rounded-xl"
+                onChange={(event) => {
+                  const filter = event.target.value?.toLocaleLowerCase()
+                  setFilteredBoxes(boxes.filter(e => {
+                    return e._id.toLocaleLowerCase().includes(filter) || e.name.toLocaleLowerCase().includes(filter)
+                  }))
+                }}
+                name="filter"
+                type="text"
+              />
+            </div>
           </div>
         </form>
       </div>

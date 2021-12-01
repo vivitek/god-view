@@ -9,10 +9,11 @@ const BASE_WS = BASE_URL.replace(/^http/, "ws");
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
-    .required("Required"),
+    .required("Required")
+    .email("Must be a valid email address"),
   password: Yup.string().required("Required"),
 });
 
-const noHeaderRoutes = ['/login']
+const noFooterHeader = ["/login"];
 
-export { BASE_URL, BASE_WS, LoginSchema, noHeaderRoutes }
+export { LoginSchema, BASE_URL, BASE_WS, noFooterHeader };
