@@ -69,7 +69,6 @@ const Header = () => {
     )
   }
 
-
   return (
     <header>
       <div className="w-full bg-gray-400 dark:bg-darkBlue h-12 md:h-20 dark:text-white flex items-center ">
