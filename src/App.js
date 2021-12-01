@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { ApolloProvider } from "@apollo/client";

@@ -89,8 +89,8 @@ const Database = () => {
         headerClassName: "",
       }, {
         name: 'actions',
-        cellClassName: "h-12 items-center",
-        headerClassName: ""
+        cellClassName: "h-12 text-center",
+        headerClassName: "text-center"
       }]
     }
   }
