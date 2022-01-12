@@ -41,7 +41,7 @@ const Box = () => {
 
   const retrieveInfo = async () => {
     try {
-      const res = (await axios.get(`http://${box.url}/system`)).data
+      const res = (await axios.get(`https://${box.url}/system`)).data
       setSystemStats(res)
     } catch {
       toast.error('Something went wrong')
