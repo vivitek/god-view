@@ -33,7 +33,7 @@ const Header = () => {
           </Link>
         </div>
         {!userContext.authed && <div className="flex flex-col mt-4 ml-4">
-          <Link to="/settings">Settings</Link>
+          <Link to="/database">Database</Link>
           <span className="cursor-pointer">Logout</span>
         </div>}
       </div>
