@@ -30,11 +30,11 @@ const Box = () => {
   useEffect(() => {
     if (box) {
       retrieveInfo(box)
-      axios.get(`http://${box.url}`).then(res => {
+      axios.get(`https://${box.url}`).then(res => {
         if (res)
           setIsOnline(true)
       })
-      axios.get(`http://${box.url}/services/logs`).then(res => setLogs(res.data))
+      axios.get(`https://${box.url}/services/logs`).then(res => setLogs(res.data))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [box])
